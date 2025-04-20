@@ -1,0 +1,12 @@
+# Virtual environment
+.venv/
+
+# ChatGPT export archives
+chatgpt-export/
+*.zip
+
+# macOS files
+.DS_Store
+
+# Logs and temp files
+*.log
