@@ -174,9 +174,13 @@ fi
 
 # --- Obsidian ingestion (auto-run if vault exists) ---
 if [ -n "${OBSIDIAN_VAULT_PATH:-}" ] && [ -d "${OBSIDIAN_VAULT_PATH}" ] && [ -f "scripts/ingest_obsidian.py" ]; then
-  log "Running Obsidian ingestion pipeline..."
-  "$PYTHON_CMD" scripts/ingest_obsidian.py
-  log "Obsidian ingestion complete."
+  if [ -z "${OPENAI_API_KEY}" ] || [ "${OPENAI_API_KEY}" = "unused" ]; then
+    warn "OPENAI_API_KEY is unset or default; skipping ingestion pipeline."
+  else
+    log "Running Obsidian ingestion pipeline..."
+    "$PYTHON_CMD" scripts/ingest_obsidian.py
+    log "Obsidian ingestion complete."
+  fi
 fi
 
 exit 0
