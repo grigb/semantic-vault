@@ -10,3 +10,6 @@ chatgpt-export/
 
 # Logs and temp files
 *.log
+
+# Notion export archives
+notion-export/
