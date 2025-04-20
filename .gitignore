@@ -13,6 +13,7 @@ chatgpt-export/
 
 # Notion export archives
 notion-export/
+test-mock-data/
 
 # Environment variables
 .env
