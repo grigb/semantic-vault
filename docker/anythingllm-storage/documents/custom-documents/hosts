@@ -1,0 +1,21 @@
+127.0.0.1 licensing.screamfrog.co.uk
+##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.1	localhost
+255.255.255.255	broadcasthost
+::1             localhost
+13.33.23.253 jetbrains.com
+# Added by Docker Desktop
+# To allow the same kube context to work on the host and the container:
+127.0.0.1 kubernetes.docker.internal
+# End of section
+## Local by Flywheel - Start ##
+::1 test.local #Local Site
+127.0.0.1 test.local #Local Site
+::1 www.test.local #Local Site
+127.0.0.1 www.test.local #Local Site
+## Local by Flywheel - End ##

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Workspace, WorkspaceDocument, fetchWorkspaces, fetchWorkspaceDocuments } from '../api';
+import { DocumentUpload } from './DocumentUpload';
 
 export const WorkspaceDashboard: React.FC = () => {
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
@@ -66,6 +67,20 @@ export const WorkspaceDashboard: React.FC = () => {
       </div>
       {selectedWorkspace && (
         <div>
+          <DocumentUpload
+            onUpload={async file => {
+              if (!selectedWorkspace) return;
+              try {
+                // Upload to backend
+                await import('../api').then(api => api.uploadDocument(file, selectedWorkspace.id));
+                // Refresh document list
+                const docs = await import('../api').then(api => api.fetchWorkspaceDocuments(selectedWorkspace.id));
+                setDocuments(docs);
+              } catch (e) {
+                alert('Upload failed: ' + (e instanceof Error ? e.message : e));
+              }
+            }}
+          />
           <h3 className="text-xl font-semibold mb-2">Documents in "{selectedWorkspace.name}"</h3>
           {documents.length === 0 ? (
             <div className="text-gray-500">No documents found.</div>

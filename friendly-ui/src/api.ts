@@ -23,6 +23,19 @@ export async function fetchWorkspaces(): Promise<Workspace[]> {
   ];
 }
 
+// Upload a document to the backend
+export async function uploadDocument(file: File, workspaceId: string): Promise<any> {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('workspace_id', workspaceId);
+  const res = await fetch('http://localhost:9010/api/upload', {
+    method: 'POST',
+    body: formData,
+  });
+  if (!res.ok) throw new Error('Failed to upload document');
+  return res.json();
+}
+
 // Fetch all documents for a workspace (simulate backend for now)
 export async function fetchWorkspaceDocuments(workspaceId: string): Promise<WorkspaceDocument[]> {
   // TODO: Replace with real backend API call
