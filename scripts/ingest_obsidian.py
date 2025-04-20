@@ -19,6 +19,7 @@ def main():
 
     # Config
     OBSIDIAN_VAULT = os.getenv('OBSIDIAN_VAULT_PATH', 'obsidian-vault')  # Path to Obsidian vault directory
+    NOTION_EXPORT_PATH = os.getenv('NOTION_EXPORT_PATH', 'notion-export')
     QDRANT_HOST = os.getenv('QDRANT_HOST', 'localhost')
     QDRANT_PORT = int(os.getenv('QDRANT_PORT', '9004'))
     GRAPHITI_API_URL = os.getenv('GRAPHITI_API_URL', 'http://localhost:9003')
@@ -37,9 +38,15 @@ def main():
     openai.api_key = OPENAI_API_KEY
     qdrant = QdrantClient(url=f"http://{QDRANT_HOST}", port=QDRANT_PORT)
 
-    # Discover and process markdown files
-    base_dir = os.path.join(os.path.dirname(__file__), '..', OBSIDIAN_VAULT)
-    md_files = glob.glob(os.path.join(base_dir, '**', '*.md'), recursive=True)
+    # Discover and process markdown files from Obsidian and Notion export
+    base_obsidian = os.path.join(os.path.dirname(__file__), '..', OBSIDIAN_VAULT)
+    base_notion = os.path.join(os.path.dirname(__file__), '..', NOTION_EXPORT_PATH)
+    md_files = []
+    for d in [base_obsidian, base_notion]:
+        if os.path.isdir(d):
+            md_files.extend(glob.glob(os.path.join(d, '**', '*.md'), recursive=True))
+    else:
+        md_files = []
 
     for path in md_files:
         with open(path, 'r', encoding='utf-8') as f:
