@@ -1,0 +1,4 @@
+FROM zepai/graphiti:latest
+
+# Copy in the patched embedder
+COPY graphiti_core/embedder/openai.py /usr/local/lib/python3.12/site-packages/graphiti_core/embedder/openai.py

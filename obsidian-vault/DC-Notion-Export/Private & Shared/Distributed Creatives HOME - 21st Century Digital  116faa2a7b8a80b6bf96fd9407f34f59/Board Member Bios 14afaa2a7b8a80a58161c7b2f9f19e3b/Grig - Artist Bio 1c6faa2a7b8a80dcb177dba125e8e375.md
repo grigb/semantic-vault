@@ -1,0 +1,3 @@
+# Grig - Artist Bio
+
+Digital artist Grig Bilham's sold-out "Trashformers" NFT collection features innovative composable 3D objects built within a rich narrative universe. Inspired by sci-fi comedy, these digital sculptures depict robots assembled from discarded materials exploring the cosmos, accompanied by a 25-chapter book that expands their story. Bilham's work uniquely merges visual artistry with interactive storytelling, inviting viewers to engage with both the aesthetic and narrative dimensions of his digital creations.
