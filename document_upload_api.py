@@ -50,6 +50,28 @@ async def upload_document(file: UploadFile = File(...), workspace_id: str = Form
     register_document_in_db(file.filename, workspace_id, docpath)
     return JSONResponse({"status": "ok", "filename": file.filename, "docpath": docpath})
 
+@app.get("/api/workspaces")
+async def get_workspaces():
+    conn = sqlite3.connect(DB_PATH)
+    cur = conn.cursor()
+    cur.execute("SELECT id, name FROM workspaces")
+    rows = cur.fetchall()
+    conn.close()
+    # Return as list of dicts
+    return [{"id": str(row[0]), "name": row[1]} for row in rows]
+
+@app.get("/api/documents")
+async def get_documents(workspace_id: str):
+    conn = sqlite3.connect(DB_PATH)
+    cur = conn.cursor()
+    cur.execute("SELECT docId, filename, docpath FROM workspace_documents WHERE workspaceId = ?", (workspace_id,))
+    rows = cur.fetchall()
+    conn.close()
+    # Return as list of dicts
+    return [
+        {"id": row[0], "filename": row[1], "docpath": row[2]} for row in rows
+    ]
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=9010)

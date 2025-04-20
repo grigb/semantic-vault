@@ -14,13 +14,18 @@ export interface WorkspaceDocument {
   createdAt: string;
 }
 
-// Fetch all workspaces (simulate backend for now)
+// Fetch all workspaces from backend
 export async function fetchWorkspaces(): Promise<Workspace[]> {
-  // TODO: Replace with real backend API call
-  // For now, hardcoded as discovered in DB
-  return [
-    { id: '1', name: 'Cascade Test Workspace' },
-  ];
+  try {
+    const res = await fetch('http://localhost:9010/api/workspaces');
+    if (!res.ok) throw new Error('Failed to fetch workspaces');
+    const data = await res.json();
+    console.log('API fetchWorkspaces response:', data);
+    return data;
+  } catch (e) {
+    console.error('API fetchWorkspaces error:', e);
+    return [];
+  }
 }
 
 // Upload a document to the backend
@@ -36,29 +41,16 @@ export async function uploadDocument(file: File, workspaceId: string): Promise<a
   return res.json();
 }
 
-// Fetch all documents for a workspace (simulate backend for now)
+// Fetch all documents for a workspace from backend
 export async function fetchWorkspaceDocuments(workspaceId: string): Promise<WorkspaceDocument[]> {
-  // TODO: Replace with real backend API call
-  if (workspaceId === '1') {
-    return [
-      {
-        id: '1',
-        filename: 'dummy.txt-7244da95-a407-4b7d-aa9d-fb921ed01a4e.json',
-        docpath: 'custom-documents/dummy.txt-7244da95-a407-4b7d-aa9d-fb921ed01a4e.json',
-        metadata: {
-          id: '7244da95-a407-4b7d-aa9d-fb921ed01a4e',
-          url: 'file:///app/collector/hotdir/dummy.txt',
-          title: 'dummy.txt',
-          docAuthor: 'Unknown',
-          description: 'Unknown',
-          docSource: 'a text file uploaded by the user.',
-          published: '4/20/2025, 5:48:05 PM',
-          wordCount: 11,
-          token_count_estimate: 14,
-        },
-        createdAt: '1745171289255',
-      },
-    ];
+  try {
+    const res = await fetch(`http://localhost:9010/api/documents?workspace_id=${encodeURIComponent(workspaceId)}`);
+    if (!res.ok) throw new Error('Failed to fetch documents');
+    const data = await res.json();
+    console.log('API fetchWorkspaceDocuments response:', data);
+    return data;
+  } catch (e) {
+    console.error('API fetchWorkspaceDocuments error:', e);
+    return [];
   }
-  return [];
 }
