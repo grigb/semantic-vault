@@ -12,7 +12,8 @@ chatgpt-export/
 *.log
 
 # Notion export archives
-notion-export/
+notion-export/*
+!notion-export/ComplexProject.md
 test-mock-data/
 
 # Environment variables
