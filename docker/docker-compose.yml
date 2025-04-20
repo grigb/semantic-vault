@@ -37,7 +37,7 @@ services:
   # Shared Memory Store: Graphiti
   # -------------------------------------------
   graphiti:
-    image: zepai/graphiti:latest # Official Graphiti image
+    image: graphiti-local-embed:latest # Patched local embedding image
     container_name: graphiti
     depends_on:
       - qdrant # Make sure the vector DB starts first
@@ -48,6 +48,7 @@ services:
       # --- Core Settings ---
       GRAPHITI_API_KEY: "${GRAPHITI_API_KEY?GRAPHITI_API_KEY must be set in .env}"
       OPENAI_API_KEY: "${OPENAI_API_KEY?OPENAI_API_KEY must be set in .env}"
+      OPENAI_API_BASE: "${OPENAI_API_BASE}"
 
       # --- Vector Store Connection (Qdrant) ---
       # Specify which vector store backend to use
