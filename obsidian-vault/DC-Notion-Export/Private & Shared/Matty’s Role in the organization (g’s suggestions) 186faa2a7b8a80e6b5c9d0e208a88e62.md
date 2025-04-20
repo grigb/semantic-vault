@@ -54,7 +54,6 @@ I've got a developer building my dream art platform for me
 
 Well it's not just for me it's as much for himself as it is for me and every creative person on this planet and beyond
 
-But holy fuck!!
 
 You all have no idea what's about to go down in 2025
 

@@ -1,0 +1,1 @@
+std::iter::Map<std::slice::Iter<'_, SearchResult>, {closure@src/ui.rs:86:59: 86:62}>
