@@ -13,3 +13,9 @@ chatgpt-export/
 
 # Notion export archives
 notion-export/
+
+# Environment variables
+.env
+
+# Private keys
+*.pem
