@@ -156,4 +156,11 @@ log "  Qdrant API:     http://localhost:9004"
 echo ""
 log "Setup complete!"
 
+# --- Obsidian ingestion (auto-run if vault exists) ---
+if [ -n "${OBSIDIAN_VAULT_PATH:-}" ] && [ -d "${OBSIDIAN_VAULT_PATH}" ] && [ -f "scripts/ingest_obsidian.py" ]; then
+  log "Running Obsidian ingestion pipeline..."
+  python3 scripts/ingest_obsidian.py
+  log "Obsidian ingestion complete."
+fi
+
 exit 0
