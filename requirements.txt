@@ -2,3 +2,5 @@ python-dotenv
 qdrant-client
 openai
 requests
+notion-client
+python-frontmatter

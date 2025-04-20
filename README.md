@@ -44,6 +44,29 @@ The core idea is that AnythingLLM (and potentially other tools like AI IDE exten
 *   **`.env` file:** Contains generated API keys and connection details. **Do not commit this file to Git.** Modify it if you need to change ports or use existing keys.
 *   **`docker-compose.yml`:** Defines the services, ports, volumes, and environment variables. You can adjust settings like `AUTH_MODE` for AnythingLLM here.
 *   **`.env.template`:** The template used to create `.env` on the first run.
+*   **Sensitive files** (e.g., `.env`, `*.pem`, any credentials) are listed in `.gitignore` and must never be committed to version control.
+
+## Notion Integration
+To export your Notion databases and ingest them into this system:
+
+1. Install Python dependencies:
+   ```bash
+   pip install notion-client python-frontmatter python-dotenv
+   ```
+2. Configure your `.env` file:
+   ```bash
+   NOTION_API_KEYS="<key1>,<key2>,<key3>"
+   NOTION_DATABASE_IDS="<dbid1>,<dbid2>,<dbid3>"
+   NOTION_EXPORT_PATH="notion-export"
+   ```
+3. Share each Notion database with its corresponding integration (via Notion's Share dialog).
+4. Run the export script:
+   ```bash
+   python scripts/export_notion.py
+   ```
+5. The exported Markdown files will appear in `notion-export/` and can be ingested like your Obsidian vault.
+
+_For multiple accounts/databases, supply comma-separated API keys and database IDs in matching order._
 
 ## Using Shared Memory
 
@@ -57,3 +80,5 @@ The core idea is that AnythingLLM (and potentially other tools like AI IDE exten
 
 ```bash
 docker-compose down
+
+```

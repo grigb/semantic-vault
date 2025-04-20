@@ -147,7 +147,6 @@ log "Launching fresh services..."
 docker compose -f docker/docker-compose.yml up -d --remove-orphans
 
 log "Services are starting up in the background."
-log "You can monitor logs using: docker compose logs -f"
 echo ""
 log "Access services:"
 log "  AnythingLLM UI: http://localhost:9002"
@@ -156,10 +155,27 @@ log "  Qdrant API:     http://localhost:9004"
 echo ""
 log "Setup complete!"
 
+# --- Python venv for ingestion scripts ---
+if [ -f "requirements.txt" ]; then
+  if [ ! -d ".venv" ]; then
+    log "Setting up Python virtual environment .venv..."
+    python3 -m venv .venv
+  fi
+  log "Activating virtual environment..."
+  # shellcheck disable=SC1091
+  . .venv/bin/activate
+  log "Installing Python dependencies..."
+  pip install --upgrade pip
+  pip install -r requirements.txt
+  PYTHON_CMD=".venv/bin/python"
+else
+  PYTHON_CMD="python3"
+fi
+
 # --- Obsidian ingestion (auto-run if vault exists) ---
 if [ -n "${OBSIDIAN_VAULT_PATH:-}" ] && [ -d "${OBSIDIAN_VAULT_PATH}" ] && [ -f "scripts/ingest_obsidian.py" ]; then
   log "Running Obsidian ingestion pipeline..."
-  python3 scripts/ingest_obsidian.py
+  "$PYTHON_CMD" scripts/ingest_obsidian.py
   log "Obsidian ingestion complete."
 fi
 
