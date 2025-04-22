@@ -1,0 +1,68 @@
+# Distributed Creatives - Website Sitemap
+
+# home
+
+# [home/lan](http://distributedcreatives.org/lan)
+
+- Home
+- Sign Up / Login
+    - Broadcasters Sign Up
+    - Creators Sign Up
+    - Advertisers Sign Up
+    - Login
+- Dashboard
+    - Broadcasters Dashboard
+        - Profile Management
+        - Broadcast Management
+        - Ad Management
+        - Analytics Dashboard
+        - Earnings and Payout
+    - Creators Dashboard
+        - Profile Management
+        - Content Upload and Management
+        - Broadcast Opportunities
+        - Monetization Dashboard
+        - Analytics Dashboard
+    - Advertisers Dashboard
+        - Campaign Management
+        - Targeting Options
+        - Ad Performance Dashboard
+        - Billing and Payments
+- Content Player
+    - Live Streaming
+    - On-Demand Content
+    - Real-Time Chat
+    - Tipping/Donation
+    - Related Content
+- Explore
+    - Discover Coffee Shops
+    - Browse by Categories
+    - Search and Filters
+    - Map View
+- Ad Management
+    - Create and Submit Ads
+    - Ad Slots Overview
+    - Targeting Criteria
+    - Preview Ads
+    - Review and Approve Ads
+- Account Management
+    - Manage Details
+    - Subscriptions
+    - Notifications
+    - Privacy Settings
+    - Delete Account
+- Help and Support
+    - FAQs
+    - Tutorials
+    - Contact Support
+- About
+    - Platform Information
+    - Mission and Vision
+    - Community Impact
+    - Team and Partnerships
+- Contact Us
+    - Form and Details
+- Legal
+    - Privacy Policy
+    - Terms of Service
+    - Cookie Policy

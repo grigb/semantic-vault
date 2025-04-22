@@ -1,0 +1,11 @@
+{
+  "settings": {
+    "archiveFolder": "ChatGPT",
+    "addDatePrefix": true,
+    "dateFormat": "YYYY-MM-DD",
+    "hasShownUpgradeNotice": false,
+    "hasCompletedUpgrade": false
+  },
+  "importedArchives": {},
+  "conversationCatalog": {}
+}

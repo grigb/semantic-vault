@@ -1,0 +1,25 @@
+# Leadership Profiles questions
+
+- **Professional Background**
+    - Can you describe your professional background and your primary area of expertise?
+    - What specific achievements or recognitions have you received in your career?
+    - What organizations or companies have you worked with, and what roles have you held?
+- **Achievements and Experience**
+    - Can you share a few of your most notable accomplishments in your field?
+    - Have you led or been part of any successful projects or initiatives that are especially relevant to our nonprofit’s mission?
+    - What unique skills or insights do you bring to our board that could positively impact the nonprofit?
+- **Affiliations and Network**
+    - Do you hold any memberships in professional associations, councils, or nonprofit organizations?
+    - Are there any notable connections or networks you are part of that could help open doors for our nonprofit?
+- **Personal Motivation and Alignment with Nonprofit Goals**
+    - What motivated you to join our board, and how do you see our mission aligning with your values?
+    - Are there any personal experiences or goals that resonate with the work we do?
+- **Fundraising and Financial Contributions**
+    - Have you previously been involved in fundraising efforts or campaigns? If so, what was your role, and what were the outcomes?
+    - Are you open to actively participating in fundraising efforts, making introductions, or leveraging your network to support our funding goals?
+- **Vision for the Nonprofit**
+    - What are your thoughts on the future direction of our nonprofit, and where do you see the most potential for growth?
+    - How do you plan to contribute to the strategic vision and planning process?
+- **Investor-Friendly Highlights**
+    - What would you say are the top reasons investors can feel confident in supporting us, given your background and involvement?
+    - Are there any unique qualities or achievements that you believe set our board apart and make us a trustworthy investment?
