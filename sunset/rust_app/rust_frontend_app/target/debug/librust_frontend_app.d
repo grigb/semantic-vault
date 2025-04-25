@@ -1,1 +1,0 @@
-/Users/grig/semantic-vault/rust_frontend_app/target/debug/librust_frontend_app.rlib: /Users/grig/semantic-vault/rust_frontend_app/src/config.rs /Users/grig/semantic-vault/rust_frontend_app/src/lib.rs /Users/grig/semantic-vault/rust_frontend_app/src/search.rs /Users/grig/semantic-vault/rust_frontend_app/src/ui.rs

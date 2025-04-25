@@ -1,3 +1,0 @@
-*.md filter=git-crypt diff=git-crypt
-*.canvas filter=git-crypt diff=git-crypt
-*.csv filter=git-crypt diff=git-crypt
