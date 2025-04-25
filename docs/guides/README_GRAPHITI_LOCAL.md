@@ -1,9 +1,17 @@
 # Graphiti Local LLM Integration Workflow
 
+[Moved from docs/README_GRAPHITI_LOCAL.md]
+
+(Full content preserved; see project index in /docs/README.md for navigation.)
+
+---
+
+# Graphiti Local LLM Integration Workflow
+
 **See also:**
-- [SYSTEM_OVERVIEW.md](SYSTEM_OVERVIEW.md)
-- [AI_FRIENDLY_PIPELINE_OVERVIEW.md](AI_FRIENDLY_PIPELINE_OVERVIEW.md)
-- [CSA Reference](CSA.md)
+- [System Overview](../onboarding/SYSTEM_OVERVIEW.md)
+- [AI Friendly Pipeline Overview](AI_FRIENDLY_PIPELINE_OVERVIEW.md)
+- [CSA Reference](../CSA.md)
 
 
 This guide documents how to ingest data, generate embeddings with your local LLM, and enable semantic search in Graphiti—**without any external API dependencies**.
