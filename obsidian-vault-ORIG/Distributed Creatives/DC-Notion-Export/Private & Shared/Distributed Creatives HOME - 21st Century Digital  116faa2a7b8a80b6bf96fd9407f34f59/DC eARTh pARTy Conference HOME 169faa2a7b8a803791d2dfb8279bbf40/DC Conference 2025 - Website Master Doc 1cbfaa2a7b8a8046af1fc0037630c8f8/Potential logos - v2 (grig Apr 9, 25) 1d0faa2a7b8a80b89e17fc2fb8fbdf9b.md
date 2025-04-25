@@ -1,3 +1,0 @@
-# Potential logos - v2 (grig Apr 9, 25)
-
-![image.png](Distributed%20Creatives/DC-Notion-Export/Private%20&%20Shared/Distributed%20Creatives%20HOME%20-%2021st%20Century%20Digital%20%20116faa2a7b8a80b6bf96fd9407f34f59/DC%20eARTh%20pARTy%20Conference%20HOME%20169faa2a7b8a803791d2dfb8279bbf40/DC%20Conference%202025%20-%20Website%20Master%20Doc%201cbfaa2a7b8a8046af1fc0037630c8f8/Potential%20logos%20-%20v2%20(grig%20Apr%209,%2025)%201d0faa2a7b8a80b89e17fc2fb8fbdf9b/image.png)
