@@ -1,48 +1,48 @@
 # Documentation Index & Navigation Guide
 
-Welcome to the documentation hub for this project. This index will help both humans and AI agents quickly find relevant information, architectural overviews, policies, and technical guides.
+Welcome to the documentation hub for this project. Use this index to find all planning, design, onboarding, guides, and component-specific documentation. Both humans and AI agents should follow this structure for clarity and maintainability.
 
 ---
 
-## Core System Docs
+## Directory Structure
 
-- **[SYSTEM_OVERVIEW.md](SYSTEM_OVERVIEW.md)** — High-level overview of the AnythingLLM + Ollama system, architecture, and user experience.
-- **[AI_FRIENDLY_PIPELINE_OVERVIEW.md](AI_FRIENDLY_PIPELINE_OVERVIEW.md)** — Technical and conceptual overview of the AI pipeline, memory, and retrieval systems.
-- **[README_GRAPHITI_LOCAL.md](README_GRAPHITI_LOCAL.md)** — Details on running Graphiti with a local LLM, embedding, and search setup.
-- **[CSA.md](CSA.md)** — Collaborative Systems Architecture principles and references.
-
-## Development & Planning
-
-- **[AI_DEV_PLAN.md](AI_DEV_PLAN.md)** — (Now web app-focused) Integration and testing plan, originally for Rust frontend, now adapted for the web interface.
-- **[IMPROVEMENTS.md](IMPROVEMENTS.md)** — List of system improvement ideas, technical enhancements, and onboarding suggestions.
-- **[FRIENDLY_UI_PLAN.md](FRIENDLY_UI_PLAN.md)** — Design and UX plan for the web-based frontend UI.
-
-## Guides & How-tos
-
-- **[Obsidian Gitcrypt Guide.md](Obsidian%20Gitcrypt%20Guide.md)** — Guide for encrypting and syncing an Obsidian vault with GitHub using git-crypt.
-- **[notion-export_ComplexProject.md](notion-export_ComplexProject.md)** — Instructions and notes for exporting and ingesting Notion databases.
-
-## Graphiti Project Docs
-
-All Graphiti-specific documentation is now grouped under [`graphiti/`](graphiti):
-- **[graphiti_README.md](graphiti/graphiti_README.md)** — Main Graphiti documentation.
-- **[graphiti_CODE_OF_CONDUCT.md](graphiti/graphiti_CODE_OF_CONDUCT.md)** — Code of conduct for contributors.
-- **[graphiti_CONTRIBUTING.md](graphiti/graphiti_CONTRIBUTING.md)** — Contribution guidelines.
-- **[graphiti_SECURITY.md](graphiti/graphiti_SECURITY.md)** — Security policies.
-- **[graphiti_Zep-CLA.md](graphiti/graphiti_Zep-CLA.md)** — Contributor License Agreement.
-- **[graphiti_mcp_server_README.md](graphiti/graphiti_mcp_server_README.md)** — MCP server documentation.
-- **[graphiti_server_README.md](graphiti/graphiti_server_README.md)** — Graphiti server documentation.
-
-## UI Subproject
-- **[friendly-ui_README.md](friendly-ui_README.md)** — UI subproject documentation.
+- **/docs/planning/** — Project status, checklists, strategy, vision, improvements, and dev plans
+  - `PROJECT_STATUS.md` — Operational log and current state (single source of truth)
+  - `SEMANTIC_SYSTEM_MASTER_CHECKLIST.md` — Actionable, checkable master checklist
+  - `SEMANTIC_SYSTEM_STRATEGY.md` — Build strategy and phases
+  - `SEMANTIC_SYSTEM_FULL_VISION.md` — Long-term vision and roadmap
+  - `IMPROVEMENTS.md` — System improvement ideas and backlog
+  - `AI_DEV_PLAN.md` — Development and integration plan
+- **/docs/design-docs/** — All system and component design docs
+  - `MODEL_CATALOG_API_DESIGN.md` — Model catalog API design/spec
+  - `FRIENDLY_UI_PLAN.md` — Web UI design and UX plan
+- **/docs/onboarding/** — Onboarding and high-level system overviews
+  - `TEAM_INTRO_TO_SEMANTIC_STACK.md` — Non-technical introduction
+  - `SYSTEM_OVERVIEW.md` — System architecture and user workflow
+- **/docs/guides/** — How-tos and technical guides
+  - `AI_FRIENDLY_PIPELINE_OVERVIEW.md` — Pipeline and retrieval overview
+  - `Obsidian Gitcrypt Guide.md` — Obsidian + git-crypt guide
+  - `notion-export_ComplexProject.md` — Notion export/ingest guide
+- **/docs/graphiti/** — All Graphiti-specific documentation
+  - (All files related to Graphiti, e.g., `graphiti_README.md`)
+- **/docs/(other-component/)/** — For future major subsystems
 
 ---
 
-## Cursor Rules
-- All active cursor rules are maintained in the [`.cursor/rules/`](../.cursor/rules/) directory at the project root.
-  - For example: [graphiti_mcp_server_cursor_rules.md](../.cursor/rules/graphiti_mcp_server_cursor_rules.md)
-- Refer to this index for locating policies, procedures, and best practices for agent memory and workflow.
+## How to Add & Maintain Documentation
+- Place new design docs in `/docs/design-docs/`.
+- Add new planning/status docs to `/docs/planning/`.
+- Add onboarding or high-level intros to `/docs/onboarding/`.
+- Place guides and how-tos in `/docs/guides/`.
+- For component-specific docs, create a subdirectory (e.g., `/docs/graphiti/`).
+- Always update this README to keep the index current.
+- Cross-link relevant docs for context and onboarding.
+
+## Cursor Rules & Agent Onboarding
+- All active cursor rules and agent onboarding docs are in [`/.cursor/rules/`](../.cursor/rules/).
+- Agents and new team members should read this index and `.cursor/rules/` first.
+- When adding new docs, update both this README and `.cursor/rules/` as needed.
 
 ---
 
-If you have suggestions or need to add new docs, please update this README and keep the navigation up to date.
+If you have suggestions or need to add new docs, please update this README and keep the navigation up to date. For any major changes, update `.cursor/rules/` to guide future agents and contributors.
