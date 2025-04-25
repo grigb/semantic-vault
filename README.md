@@ -1,4 +1,168 @@
-# AI Starter Kit: AnythingLLM + Graphiti Shared Memory
+# Semantic Vault: Vector Search Platform with Neo4j, Graphiti, and Embedding Proxy
+
+## Overview
+Semantic Vault is a modern, extensible platform for knowledge graph and vector search, combining:
+- **Neo4j 5.18+**: Native vector search and graph database
+- **Graphiti**: API and semantic search backend
+- **Embedding Proxy**: OpenAI-compatible local embedding service
+- **Qdrant** (optional): High-performance vector DB
+- **AnythingLLM**: RAG/LLM frontend for chat and document search
+
+All services are orchestrated via Docker Compose for reproducibility, multi-project support, and easy integration.
+
+---
+
+## Quickstart
+
+### 1. Clone & Configure
+```sh
+git clone <your-repo-url> semantic-vault
+cd semantic-vault
+cp .env.example .env
+# Edit .env to set NEO4J_PASSWORD, OPENAI_API_KEY, etc.
+```
+
+### 2. Build & Launch All Services
+```sh
+docker compose -f docker/docker-compose.yml up --build -d
+```
+- This starts Neo4j, Graphiti, Embedding Proxy, AnythingLLM, and Qdrant.
+- Model data is shared via the `model_data` Docker volume for efficient, multi-container use.
+
+### 3. Create Vector Index in Neo4j (One-time)
+```sh
+docker compose -f docker/docker-compose.yml exec neo4j cypher-shell -u neo4j -p "$NEO4J_PASSWORD" \
+  "CREATE VECTOR INDEX rel_fact_embedding_index FOR ()-[r:RELATES_TO]-() ON (r.fact_embedding) OPTIONS {indexConfig: {\`vector.dimensions\`: 1536, \`vector.similarity_function\`: 'cosine'}};"
+```
+
+### 4. Ingest Test Data
+```sh
+python scripts/quick_ingest_neo4j.py
+```
+
+### 5. Run a Vector Search
+```sh
+curl -X POST http://localhost:9003/search \
+  -H 'Content-Type: application/json' \
+  -d '{"query": "test fact", "group_ids": ["products"], "max_facts": 5}'
+```
+
+---
+
+## Architecture & Components
+
+### Services
+- **Neo4j**: Graph DB, stores nodes, relationships, and vector indexes
+- **Graphiti**: API backend for hybrid (vector+symbolic) search
+- **Embedding Proxy**: FastAPI service, OpenAI-compatible `/v1/embeddings` endpoint
+- **AnythingLLM**: UI for chat/RAG workflows
+- **Qdrant**: Vector DB (optional, for advanced/large-scale vector storage)
+
+### Docker Volumes
+- `model_data`: Shared across embedding proxy and other containers for efficient model reuse
+- All persistent data (Neo4j, Qdrant, Graphiti, AnythingLLM) is stored in named Docker volumes for easy migration and multi-project use
+
+---
+
+## Usage & Testing
+
+### Ingesting Data
+- Use `scripts/quick_ingest_neo4j.py` or `scripts/example_ingest.py` to create test nodes and relationships with all required properties:
+  - `fact_embedding` (1536-dim vector)
+  - `created_at` (Neo4j datetime)
+  - `episodes` (empty list or list of episode metadata)
+  - `fact`, `name`, `uuid`, `file_path`, `group_id`
+
+### Running Searches
+- Use the `/search` endpoint on Graphiti:
+  - POST `{ "query": "<text>", "group_ids": ["products"], "max_facts": 5 }`
+  - Returns matching facts/edges with metadata
+
+### Health Checks
+- Neo4j: http://localhost:7474 (browser), or `docker compose logs neo4j`
+- Embedding Proxy: `curl localhost:9009/v1/embeddings`
+- Graphiti: `/search` endpoint, or `docker compose logs graphiti`
+
+### Automated End-to-End Test
+- Run the ingestion script, then query `/search` and assert the returned fact matches the ingested one.
+- Example test script: `scripts/example_ingest.py`
+
+---
+
+## Integration & Extensibility
+
+### API Endpoints
+- **Graphiti**: `/search`, `/ingest`, `/api/v1/memory` (shared memory for LLMs)
+- **Embedding Proxy**: `/v1/embeddings` (OpenAI-compatible)
+- **Neo4j**: Bolt and HTTP (for advanced queries)
+- **AnythingLLM**: UI and API for chat/RAG
+
+### Multi-Project & Multi-Container Use
+- All containers use the same `model_data` volume for model files
+- You can mount your own data, fork the repo, or symlink `.env` and Docker Compose files for new projects
+- Supports running multiple projects on the same host without model duplication
+
+### Adding Your Own Data
+- Modify or extend the ingestion scripts to add your own nodes, relationships, and embeddings
+- Use the embedding proxy to generate vectors for any text
+- Adapt Graphiti endpoints for custom search workflows
+
+---
+
+## Tools & Scripts
+
+### Ingestion
+- `scripts/quick_ingest_neo4j.py`: Minimal test data ingestion
+- `scripts/example_ingest.py`: Template for custom ingestion
+
+### Health & Setup
+- `start.sh`: Automated setup and startup
+- `scripts/health_check.sh`: Health check for all services
+
+### Testing
+- Use the provided ingestion and search scripts to validate the pipeline
+- Add regression tests as needed for your workflow
+
+---
+
+## Example: Add a New Project
+1. Fork or clone the repo
+2. Mount your own data directory (e.g., `-v /my/data:/app/data`)
+3. Use the shared `model_data` volume
+4. Start containers with Docker Compose
+5. Ingest your data and use the API endpoints as described
+
+---
+
+## Troubleshooting
+- Check logs for each service with `docker compose logs <service>`
+- Confirm all environment variables are set in `.env`
+- Ensure the Neo4j vector index is created and online
+- Verify the embedding proxy returns 1536-dim vectors
+
+---
+
+## FAQ
+**Q: Can I use my own embeddings or models?**
+A: Yes, point the embedding proxy to your model or use any OpenAI-compatible endpoint.
+
+**Q: How do I scale to multiple projects or users?**
+A: Use Docker volumes and environment variables to isolate or share data as needed.
+
+**Q: How do I add new endpoints or workflows?**
+A: Extend Graphiti or add new scripts/services as needed—everything is modular.
+
+---
+
+## Credits
+- Inspired by modern RAG, vector search, and knowledge graph best practices
+- Contributions welcome!
+
+---
+
+## License
+MIT License
+
 
 This repository provides a simple way to set up a self-hosted AI environment using Docker Compose, featuring:
 
