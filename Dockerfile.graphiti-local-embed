@@ -1,5 +1,14 @@
 # Start from the official Graphiti image
 FROM zepai/graphiti:latest
 
+# Install diagnostics tools
+USER root
+RUN apt-get update && apt-get install -y iputils-ping netcat iproute2 && rm -rf /var/lib/apt/lists/*
+USER 1000
+
 # Copy in the patched OpenAI embedder
 COPY openai_embedder_local_patch.py /usr/local/lib/python3.12/site-packages/graphiti_core/embedder/openai.py
+
+# Temporarily override entrypoint for diagnostics
+USER root
+ENTRYPOINT ["/bin/sh"]

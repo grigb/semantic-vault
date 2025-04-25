@@ -37,7 +37,7 @@ services:
   # Shared Memory Store: Graphiti
   # -------------------------------------------
   graphiti:
-    image: graphiti-local-embed:latest # Patched local embedding image
+    image: graphiti-debug:latest # Patched local embedding image
     container_name: graphiti
     depends_on:
       - qdrant # Make sure the vector DB starts first
@@ -98,7 +98,7 @@ services:
   # Graph Database: Neo4j
   # -------------------------------------------
   neo4j:
-    image: neo4j:5.18 # Pinned to a version known to be more stable on ARM64
+    image: neo4j:5.13 # Downgraded for compatibility troubleshooting
     container_name: neo4j
     ports:
       - "9006:7474" # Changed host port to uncommon 9006 for Neo4j Browser
