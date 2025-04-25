@@ -98,7 +98,7 @@ services:
   # Graph Database: Neo4j
   # -------------------------------------------
   neo4j:
-    image: neo4j:5.13 # Downgraded for compatibility troubleshooting
+    image: neo4j:5.18
     container_name: neo4j
     ports:
       - "9006:7474" # Changed host port to uncommon 9006 for Neo4j Browser
@@ -109,8 +109,7 @@ services:
     environment:
       # Sets the initial password for the 'neo4j' user.
       NEO4J_AUTH: neo4j/${NEO4J_PASSWORD?NEO4J_PASSWORD must be set in .env}
-      # Optional: Plugins or other settings
-      # NEO4J_PLUGINS: '[\"apoc\"]'
+      NEO4J_PLUGINS: '["graph-data-science"]'
     restart: unless-stopped
     networks:
       - ai_network
