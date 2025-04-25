@@ -17,6 +17,7 @@ Welcome to the documentation hub for this project. Use this index to find all pl
   - `design-docs/MODEL_CATALOG_API_DESIGN.md` — Model catalog API design/spec
   - `design-docs/FRIENDLY_UI_PLAN.md` — Web UI design and UX plan
 - **/docs/onboarding/** — Onboarding and high-level system overviews
+- `onboarding/DEVELOPMENT_GUIDE.md` — Development workflow and best practices
   - `onboarding/TEAM_INTRO_TO_SEMANTIC_STACK.md` — Non-technical introduction
   - `onboarding/SYSTEM_OVERVIEW.md` — System architecture and user workflow
 - **/docs/guides/** — How-tos and technical guides
