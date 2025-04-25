@@ -1,6 +1,45 @@
 # Virtual environment
 .venv/
 
+# Rust build artifacts
+**/target/
+sunset/rust_app/rust_frontend_app/target/
+
+# Node dependencies
+**/node_modules/
+friendly-ui/node_modules/
+
+# Python cache
+**/__pycache__/
+**/*.pyc
+
+# macOS files
+.DS_Store
+
+# IDE/project files
+.idea/
+.vscode/
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Notion export archives
+notion-export/*
+!notion-export/ComplexProject.md
+
+# Obsidian vault (do not include in repo)
+obsidian-vault/
+
+test-mock-data/
+
+# Environment variables
+.env
+
+# Private keys
+*.pem
+
+
 # ChatGPT export archives
 chatgpt-export/
 *.zip
