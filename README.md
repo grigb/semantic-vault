@@ -76,7 +76,177 @@ _For multiple accounts/databases, supply comma-separated API keys and database I
     *   Provide the `GRAPHITI_API_KEY` from your `.env` file for authentication.
     *   Optionally specify a namespace if you want to segment memories (e.g., per project).
 
-## Stopping Services
+---
+
+## ⚡️ Current State & Upgrade Roadmap
+
+**Current Stack:**
+- Neo4j: 5.13 (as pinned in docker-compose.yml; not yet on 5.18+)
+- Graph Data Science (GDS): version as provided by the current Neo4j image (may not be latest)
+- Qdrant: latest
+- AnythingLLM, Graphiti: custom/patched images
+- Embedding Proxy: OpenAI-compatible, local FastAPI service
+
+**Known Limitations:**
+- Neo4j vector similarity search (native vector indexes, metadata filtering, etc.) is only fully supported in Neo4j 5.18+ and GDS 2.16+.
+- Current stack may not support all advanced vector search features (relationship vector indexes, pre-filtering, etc.).
+- Helper scripts for bootstrap, migration, and health checks are **not yet included**—these will be added after the upgrade.
+
+**Upgrade Plan:**
+1. Upgrade Neo4j to 5.18+ and GDS to 2.16+ (see below for Docker example).
+2. Validate new vector index features and advanced queries.
+3. Update all documentation and provide full automation scripts for setup, migration, and health checks.
+4. Ensure all new projects and integrations use the upgraded, reproducible stack.
+
+*This section will be updated as the upgrade progresses. For now, follow the manual steps and version notes below.*
+
+---
+
+## 🔗 How to Integrate This Stack Into Other Projects
+
+This stack is designed for easy reuse across projects needing semantic memory, LLMs, or vector search. To integrate:
+
+1. **Reuse Graphiti as a Central Memory API:**
+   - Point any app or script to the Graphiti endpoint (e.g., `http://localhost:8080/api/v1/memory` or via Docker network).
+   - Use the `GRAPHITI_API_KEY` from your `.env` for authentication.
+   - Optionally set a custom namespace per project for data isolation.
+
+2. **Connect to AnythingLLM for RAG/Chat:**
+   - Access via the AnythingLLM UI or API (`http://localhost:3001` or mapped port).
+   - Configure the `MEMORY_BACKEND` and `MCP_API_URL` to point to your Graphiti instance.
+   - Use the same `.env` variables for seamless integration.
+
+3. **Leverage the Embedding Proxy:**
+   - Use the OpenAI-compatible `/v1/embeddings` endpoint (default: `http://localhost:9009/v1/embeddings`).
+   - Point any OpenAI-compatible client, script, or service to this endpoint for local, fast embeddings.
+
+4. **Share the Vector Store (Qdrant/Neo4j):**
+   - Use the same Qdrant or Neo4j DB for multiple projects by sharing host/port and credentials from `.env`.
+   - Ensure vector schema consistency across projects.
+
+5. **Copy or Symlink the `.env` and Docker Compose Files:**
+   - For new projects, copy `.env.template` and customize as needed.
+   - You can symlink or import the Docker Compose and service configs for rapid setup.
+
+6. **Extend or Swap Components:**
+   - Add new LLMs, memory backends, or vector DBs by updating the compose file and `.env`.
+   - All components are modular and can be replaced or extended as needed.
+
+---
+
+## 🚀 Upgrade Strategy: Neo4j & GDS
+
+To unlock advanced vector search features, follow this upgrade plan:
+
+### 1. Upgrade Neo4j to 5.18+ and GDS to 2.16+
+- **Docker:**
+  ```bash
+  docker run \
+    --name neo4j-vector \
+    -p7474:7474 -p7687:7687 \
+    -e NEO4J_AUTH=neo4j/test \
+    -e NEO4J_PLUGINS='["graph-data-science"]' \
+    -e NEO4J_dbms_security_procedures_unrestricted=gds.* \
+    neo4j:5.18
+  ```
+- **Neo4j Desktop:**
+  - Download the latest Neo4j Desktop and create a new DBMS with version 5.18 or higher.
+  - Add the Graph Data Science (GDS) plugin (version 2.16+).
+
+### 2. Update docker-compose.yml
+- Change the Neo4j image tag to `neo4j:5.18` (or higher) in your compose file.
+- Ensure `NEO4J_PLUGINS` includes `graph-data-science`.
+- Rebuild/restart your stack after making changes.
+
+### 3. Post-Upgrade Checklist
+- Confirm Neo4j is running 5.18+ and GDS is 2.16+ (`CALL gds.version()` in Cypher shell).
+- Test creating a vector index and running a vector query (see below).
+- Check that all services (Graphiti, AnythingLLM, embedding proxy) connect successfully.
+- Update documentation and scripts as needed.
+
+### 4. Next Steps
+- After confirming the upgrade, create or update helper scripts for bootstrap, migration, and health checks.
+- Announce the new baseline for all future projects and integrations.
+
+---
+
+## 🔗 How to Integrate This Stack Into Other Projects
+
+### 🚀 Latest Features (Neo4j 5.18+ & GDS 2.16+)
+- **High-dimensional vector indexes** (up to 4096 dims; e.g., OpenAI `text-embedding-3-large`)
+- **Relationship vector indexes** for semantic search over relationship embeddings
+- **Enhanced similarity functions:** `vector.similarity.cosine`, `vector.similarity.euclidean`
+- **Metadata pre-filtering** for efficient, targeted vector search
+- **GDS library** with advanced similarity algorithms and performance improvements
+
+### 🛠️ Upgrade & Implementation Steps
+1. **Upgrade Neo4j** to 5.18+ for latest vector features.
+2. **Install GDS 2.16+** (Graph Data Science plugin) for advanced similarity and vector support.
+   - Docker example:
+     ```bash
+     docker run \
+       --name neo4j-vector \
+       -p7474:7474 -p7687:7687 \
+       -e NEO4J_AUTH=neo4j/test \
+       -e NEO4J_PLUGINS='["graph-data-science"]' \
+       -e NEO4J_dbms_security_procedures_unrestricted=gds.* \
+       neo4j:5.18
+     ```
+   - Or add GDS via Neo4j Desktop plugin manager.
+3. **Store embeddings as `FloatArray`** properties on relationships (e.g., `r.embedding`).
+   - Normalize vectors before storage for cosine similarity.
+   - Use consistent vector length.
+   - Example:
+     ```cypher
+     MATCH (a)-[r:SIMILAR_TO]->(b)
+     SET r.embedding = [0.12, -0.45, ..., 0.91]
+     ```
+4. **Create a vector index:**
+   ```cypher
+   CREATE VECTOR INDEX rel_embedding_index IF NOT EXISTS
+   FOR ()-[r:SIMILAR_TO]-()
+   ON (r.embedding)
+   OPTIONS {
+     indexConfig: {
+       `vector.dimensions`: 1536,
+       `vector.similarity_function`: "cosine"
+     }
+   }
+   ```
+5. **Query with vector similarity:**
+   ```cypher
+   CALL db.index.vector.queryRelationships('rel_embedding_index', 5, [0.12, -0.45, ..., 0.91])
+   YIELD relationship, score
+   RETURN relationship, score
+   ORDER BY score DESC
+   ```
+   Or with GDS:
+   ```cypher
+   WITH [0.12, -0.45, ..., 0.91] AS queryEmbedding
+   MATCH ()-[r:SIMILAR_TO]->()
+   RETURN r, gds.similarity.cosine(r.embedding, queryEmbedding) AS score
+   ORDER BY score DESC LIMIT 10
+   ```
+6. **Migration tip:**
+   ```cypher
+   MATCH ()-[r:SIMILAR_TO]->()
+   WHERE NOT exists(r.embedding)
+   SET r.embedding = apoc.convert.toFloatList(r.raw_embedding_string)
+   ```
+
+### ⚠️ Production Considerations
+- **Index Maintenance:** Monitor and rebuild after bulk imports/model changes.
+- **Security:** Restrict unused procedures; use authentication.
+- **Performance:** Use metadata pre-filtering and proper indexing; normalize vectors for best results.
+- **Consistent Schema:** Ensure all embeddings are same length and type.
+
+### 📚 References
+- [Neo4j Vector Search Docs](https://neo4j.com/docs/operations-manual/current/indexes/vector-index/)
+- [GDS Similarity Functions](https://neo4j.com/docs/graph-data-science/current/algorithms/vector-similarity/)
+- [Cypher Manual - Vector Indexes](https://neo4j.com/docs/cypher-manual/current/indexes-for-vector-search/)
+- [APOC Procedures](https://neo4j.com/labs/apoc/)
+
+---
 
 ```bash
 docker-compose down
