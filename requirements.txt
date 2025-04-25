@@ -4,3 +4,5 @@ openai
 requests
 notion-client
 python-frontmatter
+neo4j
+pytest
