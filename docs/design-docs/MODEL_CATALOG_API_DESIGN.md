@@ -17,42 +17,109 @@ To provide a unified API for listing, searching, and managing both local and rem
 
 ---
 
-## API Endpoints (OpenAPI Sketch)
+## API Endpoints
 
-### `GET /v1/model_catalog`
-- **Query params:**
-  - `source`: `local` | `huggingface` | `all` (default: `all`)
-  - `type`: `embedding` | `llm` | `all` (default: `all`)
-  - `search`: string (optional, fuzzy search)
-  - `page`: int (default: 1)
-  - `page_size`: int (default: 20)
-- **Response:**
-```json
-{
-  "models": [
-    {
-      "name": "all-MiniLM-L6-v2",
-      "type": "embedding",
-      "description": "SentenceTransformer: efficient universal sentence encoder.",
-      "size": "80MB",
-      "source": "local",
-      "installed": true
-    },
-    {
-      "name": "mistralai/Mistral-7B-Instruct-v0.2",
-      "type": "llm",
-      "description": "Instruction-tuned LLM.",
-      "size": "13GB",
-      "source": "huggingface",
-      "installed": false
-    }
-  ],
-  "page": 1,
-  "total": 2
-}
+### OpenAPI Spec (YAML)
+
+```yaml
+openapi: 3.0.3
+info:
+  title: Model Catalog API
+  version: 1.0.0
+paths:
+  /v1/model_catalog:
+    get:
+      summary: List models (local and remote)
+      parameters:
+        - in: query
+          name: source
+          schema:
+            type: string
+            enum: [local, huggingface, all]
+          description: Source of models (default: all)
+        - in: query
+          name: type
+          schema:
+            type: string
+            enum: [embedding, llm, all]
+          description: Model type (default: all)
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: Fuzzy search string
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+          description: Page number
+        - in: query
+          name: page_size
+          schema:
+            type: integer
+            default: 20
+          description: Results per page
+      responses:
+        '200':
+          description: List of models
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  models:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ModelMetadata'
+                  page:
+                    type: integer
+                  total:
+                    type: integer
+components:
+  schemas:
+    ModelMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum: [embedding, llm]
+        description:
+          type: string
+        size:
+          type: string
+        source:
+          type: string
+        installed:
+          type: boolean
 ```
 
 ---
+
+### Local Model Cache Directory Structure & Metadata Extraction
+
+- **Directory Structure:**
+  - All local models are stored in a configurable cache directory, e.g. `~/.semantic_models/`.
+  - Subdirectories for each model: `<cache_dir>/<model_name>/`
+  - Each model directory contains:
+    - Model files (weights, configs)
+    - `metadata.json` (containing: name, type, description, size, source, install date, etc.)
+- **Metadata Extraction:**
+  - On API request, scan the cache directory for all subdirectories.
+  - Read and parse `metadata.json` for each model.
+  - If `metadata.json` is missing, attempt to infer metadata from file names or directory structure.
+  - Compute size from disk usage if not specified.
+  - Mark `installed: true` for all models found locally.
+- **Extensibility:**
+  - Future providers (Ollama, LM Studio) should follow the same pattern: adapter writes compatible `metadata.json`.
+
+---
+
+All requirements and acceptance criteria from the [Phase 2 checklist](../planning/SEMANTIC_SYSTEM_MASTER_CHECKLIST.md) are now addressed in this design. See also:
+- [../SEMANTIC_SYSTEM_STRATEGY.md](../SEMANTIC_SYSTEM_STRATEGY.md)
+- [../SEMANTIC_SYSTEM_FULL_VISION.md](../SEMANTIC_SYSTEM_FULL_VISION.md)
 
 ## Model Metadata Schema
 - `name` (string)

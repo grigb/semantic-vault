@@ -33,6 +33,7 @@
   },
   
   "documentation_rules": {
+    "continuous_documentation": "If anything new, unclear, or not yet documented arises during development, it must be noted and added to the documentation in the correct place according to the docs directory structure. This ensures ongoing documentation completeness and accuracy.",
     "directory_structure": {
       "/docs/planning/": "Project status, checklists, strategy, vision, improvements, and dev plans",
       "/docs/design-docs/": "All system and component design docs",
