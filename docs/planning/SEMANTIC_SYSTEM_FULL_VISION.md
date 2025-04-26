@@ -1,7 +1,5 @@
 # Semantic System: Full Vision & Roadmap
 
-# Semantic System: Full Vision & Roadmap
-
 ---
 
 ## 1. The Big Picture: What We Want to Build

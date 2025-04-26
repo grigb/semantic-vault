@@ -1,7 +1,5 @@
 # Graphiti Local LLM Integration Workflow
 
-# Graphiti Local LLM Integration Workflow
-
 **See also:**
 - [System Overview](../onboarding/SYSTEM_OVERVIEW.md)
 - [AI Friendly Pipeline Overview](AI_FRIENDLY_PIPELINE_OVERVIEW.md)
