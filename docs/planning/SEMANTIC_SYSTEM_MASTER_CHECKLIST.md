@@ -101,8 +101,16 @@ This checklist breaks down each phase into actionable, checkable steps, with acc
     - [x] Subtasks: Implement graphing, integrate with dashboard, test
     - _Note: Entity network visualization and analytics graphs are implemented and working._
 - [ ] **Implement multi-modal support (images, audio, etc.)**
-    - [ ] Acceptance Criteria: Can ingest/search non-text data
-    - [ ] Subtasks: Research libraries, prototype, document
+    - [x] Research: Selected open-source, ARM64-compatible models: CLIP (images), Whisper.cpp (audio, primary), OpenL3 (audio, secondary/optional)
+    - [x] ARM64/Docker compatibility confirmed for CLIP and Whisper.cpp; OpenL3 requires manual build if used
+    - [ ] Acceptance Criteria: Can ingest/search non-text data using local, ARM64-native models (no external APIs)
+    - [ ] Subtasks:
+        - Prototype ARM64 Docker containers for CLIP and Whisper.cpp
+        - Test embedding extraction on Mac M1
+        - Integrate with Neo4j/Qdrant
+        - Document setup, build process, and troubleshooting
+        - (Optional) Prototype OpenL3 if general audio embeddings are required
+    - _Note: Research complete. Proceeding to Docker prototyping and integration. Emphasize ARM64-native builds and Docker reproducibility as acceptance criteria._
 - [ ] **Add notification and automation features**
     - [ ] Acceptance Criteria: System can alert users, trigger workflows
     - [ ] Subtasks: Implement notification logic, UI, test
