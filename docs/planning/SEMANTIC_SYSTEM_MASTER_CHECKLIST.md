@@ -50,9 +50,9 @@ This checklist breaks down each phase into actionable, checkable steps, with acc
 - [x] **Build web UI for model management, testing, and switching**
     - [x] Acceptance Criteria: Can view/install/switch models, run embedding/LLM tests from browser
     - [x] Subtasks: UI for model selection, install, status; integrate test tools; document usage
-- [ ] **Integrate and test with Obsidian markdown vault**
-    - [ ] Acceptance Criteria: Can ingest/test markdown from Obsidian vault
-    - [ ] Subtasks: Build/test ingestion script for markdown, expose via web UI, document workflow
+- [x] **Integrate and test with Obsidian markdown vault**
+    - [x] Acceptance Criteria: Can ingest/test markdown from Obsidian vault
+    - [x] Subtasks: Build/test ingestion script for markdown, expose via web UI, document workflow
 - [ ] **Q&A over markdown content**
     - [ ] Acceptance Criteria: User can ask questions about ingested markdown and get semantic answers
     - [ ] Subtasks: Add Q&A UI, connect to search/LLM backend, test with sample queries
