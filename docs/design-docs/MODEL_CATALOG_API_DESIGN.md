@@ -76,6 +76,64 @@ paths:
                     type: integer
                   total:
                     type: integer
+  /v1/model_catalog/install:
+    post:
+      summary: Install a model (Hugging Face or local)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, source, type]
+              properties:
+                name:
+                  type: string
+                  description: Model identifier (e.g. huggingface repo id)
+                source:
+                  type: string
+                  enum: [huggingface, local]
+                  description: Where to install from
+                type:
+                  type: string
+                  enum: [embedding, llm]
+                  description: Model type
+      responses:
+        '200':
+          description: Model installed
+        '400':
+          description: Missing/invalid fields
+        '409':
+          description: Model already installed
+        '500':
+          description: Download or install error
+  /v1/model_catalog/switch:
+    post:
+      summary: Switch active model for a given type
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, type]
+              properties:
+                name:
+                  type: string
+                  description: Model identifier (must be installed)
+                type:
+                  type: string
+                  enum: [embedding, llm]
+                  description: Model type
+      responses:
+        '200':
+          description: Active model switched
+        '400':
+          description: Missing/invalid fields
+        '404':
+          description: Model not installed
+        '500':
+          description: Error switching model
 components:
   schemas:
     ModelMetadata:
@@ -95,6 +153,24 @@ components:
         installed:
           type: boolean
 ```
+
+---
+
+## Active Model State Convention
+
+- The current active model for each type (embedding, llm) is tracked in `~/.semantic_models/active_models.json`.
+- Example format:
+  ```json
+  {
+    "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+    "llm": "mistralai/Mistral-7B-Instruct-v0.2"
+  }
+  ```
+- The `/switch` endpoint updates this file. All backend components should read from here to determine the active model.
+
+## Error Handling
+- All endpoints return clear error messages and HTTP status codes for missing fields, install conflicts, and backend errors.
+- See `graph_service/routers/test_model_catalog.py` for test coverage of error scenarios.
 
 ---
 

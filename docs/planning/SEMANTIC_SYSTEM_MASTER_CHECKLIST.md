@@ -37,12 +37,13 @@ This checklist breaks down each phase into actionable, checkable steps, with acc
 ---
 
 ## Phase 2: Unified Model Management & Web Interface (Prioritized by Dependency)
-- [ ] **Design/spec model catalog API (local + Hugging Face/remote)**
-    - [ ] Acceptance Criteria: Lists local and remote models with metadata (name, type, desc, size, status)
-    - [ ] Subtasks: Research Hugging Face API, draft OpenAPI spec, define schema, link to design doc
-- [ ] **Implement API endpoints for install/list/switch (embedding & LLM models)**
-    - [ ] Acceptance Criteria: Endpoints work for local/remote models, clear error/status reporting
-    - [ ] Subtasks: Implement endpoints, test with multiple model types
+- [x] **Design/spec model catalog API (local + Hugging Face/remote)** _(see [Model Catalog API Design](../design-docs/MODEL_CATALOG_API_DESIGN.md))_
+    - [x] Acceptance Criteria: Lists local and remote models with metadata (name, type, desc, size, status)
+    - [x] Subtasks: Research Hugging Face API, draft OpenAPI spec, define schema, link to design doc
+- [x] **Implement API endpoints for install/list/switch (embedding & LLM models)**
+    - [x] Acceptance Criteria: Endpoints work for local/remote models, clear error/status reporting
+    - [x] Subtasks: Implement endpoints, test with multiple model types (see `test_model_catalog.py` for coverage)
+    - [x] Tests: All error/status scenarios are covered and passing
 - [ ] **Enable shared model storage across containers/projects**
     - [ ] Acceptance Criteria: Models persist across container rebuilds, can be shared by multiple projects
     - [ ] Subtasks: Docker volume config, test persistence, document setup
