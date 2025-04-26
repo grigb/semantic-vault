@@ -89,14 +89,17 @@ This checklist breaks down each phase into actionable, checkable steps, with acc
 
 ## Phase 4: Advanced Features & Multi-Modal Support (Reordered for Dependency)
 - [x] **Design/spec analytics dashboard and visualizations** ([docs/design-docs/ANALYTICS_DASHBOARD_SPEC.md](../design-docs/ANALYTICS_DASHBOARD_SPEC.md))
-    - [ ] Acceptance Criteria: Clear plan for analytics, visualizations, data sources
-    - [ ] Subtasks: Draft dashboard spec, define metrics, link to design doc
-- [ ] **Build analytics dashboard (usage, resource, trends)**
-    - [ ] Acceptance Criteria: Dashboard displays real-time and historical data
-    - [ ] Subtasks: Implement backend, frontend, test
-- [ ] **Add visualizations (character arcs, entity networks, etc.)**
-    - [ ] Acceptance Criteria: Can visualize key data relationships
-    - [ ] Subtasks: Implement graphing, integrate with dashboard, test
+    - [x] Acceptance Criteria: Clear plan for analytics, visualizations, data sources
+    - [x] Subtasks: Draft dashboard spec, define metrics, link to design doc
+    - _Note: Dashboard design and data sources finalized; see linked design doc._
+- [x] **Build analytics dashboard (usage, resource, trends)**
+    - [x] Acceptance Criteria: Dashboard displays real-time and historical data; interactive and functional in browser (as of 2025-04-25)
+    - [x] Subtasks: Implement backend, frontend, test (all endpoints live and tested: /v1/model_catalog, /v1/analytics/metrics, /healthcheck, etc.)
+    - _Note: Dashboard now fully interactive and functional. All major UI features (health, model management, analytics, entity network) are live and tested._
+- [x] **Add visualizations (character arcs, entity networks, etc.)**
+    - [x] Acceptance Criteria: Can visualize key data relationships (entity network, analytics, etc.)
+    - [x] Subtasks: Implement graphing, integrate with dashboard, test
+    - _Note: Entity network visualization and analytics graphs are implemented and working._
 - [ ] **Implement multi-modal support (images, audio, etc.)**
     - [ ] Acceptance Criteria: Can ingest/search non-text data
     - [ ] Subtasks: Research libraries, prototype, document

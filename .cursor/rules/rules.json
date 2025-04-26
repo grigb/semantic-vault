@@ -54,6 +54,7 @@
   },
   
   "development_workflow": {
+    "maximum_file_size_rule": "Maximum file size is 500 lines. If a file exceeds 500 lines, it must be refactored into smaller modules or components.",
     "before_starting": [
       "Review master checklist and identify current phase and next steps",
       "Check the specific acceptance criteria for your task",
