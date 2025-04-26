@@ -59,9 +59,9 @@ This checklist breaks down each phase into actionable, checkable steps, with acc
 - [x] **System health dashboard in web UI**
     - [x] Acceptance Criteria: Can view status of all core services (embedding proxy, vector DB, LLMs, etc.)
     - [x] Subtasks: Implement health checks, display status in UI, add alerts for failures
-- [ ] **Document model management features and usage**
-    - [ ] Acceptance Criteria: Clear docs for all new features, with screenshots/examples
-    - [ ] Subtasks: Update README, add web UI usage guide, link to design docs
+- [x] **Document model management features and usage**
+    - [x] Acceptance Criteria: Clear docs for all new features, with screenshots/examples
+    - [x] Subtasks: Update README, add web UI usage guide, link to design docs
 
 ---
 
