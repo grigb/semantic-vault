@@ -44,9 +44,9 @@ This checklist breaks down each phase into actionable, checkable steps, with acc
     - [x] Acceptance Criteria: Endpoints work for local/remote models, clear error/status reporting
     - [x] Subtasks: Implement endpoints, test with multiple model types (see `test_model_catalog.py` for coverage)
     - [x] Tests: All error/status scenarios are covered and passing
-- [ ] **Enable shared model storage across containers/projects**
-    - [ ] Acceptance Criteria: Models persist across container rebuilds, can be shared by multiple projects
-    - [ ] Subtasks: Docker volume config, test persistence, document setup
+- [x] **Enable shared model storage across containers/projects**
+    - [x] Acceptance Criteria: Models persist across container rebuilds, can be shared by multiple projects
+    - [x] Subtasks: Docker volume config, test persistence, document setup
 - [ ] **Build web UI for model management, testing, and switching**
     - [ ] Acceptance Criteria: Can view/install/switch models, run embedding/LLM tests from browser
     - [ ] Subtasks: UI for model selection, install, status; integrate test tools; document usage
