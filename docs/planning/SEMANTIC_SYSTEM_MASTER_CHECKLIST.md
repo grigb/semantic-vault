@@ -53,9 +53,9 @@ This checklist breaks down each phase into actionable, checkable steps, with acc
 - [x] **Integrate and test with Obsidian markdown vault**
     - [x] Acceptance Criteria: Can ingest/test markdown from Obsidian vault
     - [x] Subtasks: Build/test ingestion script for markdown, expose via web UI, document workflow
-- [ ] **Q&A over markdown content**
-    - [ ] Acceptance Criteria: User can ask questions about ingested markdown and get semantic answers
-    - [ ] Subtasks: Add Q&A UI, connect to search/LLM backend, test with sample queries
+- [x] **Q&A over markdown content**
+    - [x] Acceptance Criteria: User can ask questions about ingested markdown and get semantic answers
+    - [x] Subtasks: Add Q&A UI, connect to search/LLM backend, test with sample queries
 - [ ] **System health dashboard in web UI**
     - [ ] Acceptance Criteria: Can view status of all core services (embedding proxy, vector DB, LLMs, etc.)
     - [ ] Subtasks: Implement health checks, display status in UI, add alerts for failures
