@@ -1,111 +1,111 @@
 {
-    "project": "Semantic System",
-    "version": "1.0",
-    "description": "Project rules for AI assistants working with the Semantic System project",
-    "doc_index_path": "/docs/README.md",
-    "master_checklist_path": "/docs/planning/SEMANTIC_SYSTEM_MASTER_CHECKLIST.md",
-    "strategy_path": "/docs/planning/SEMANTIC_SYSTEM_STRATEGY.md",
-    "vision_path": "/docs/planning/SEMANTIC_SYSTEM_FULL_VISION.md",
-    "project_status_path": "/docs/planning/PROJECT_STATUS.md",
-    
-    "core_principles": [
-      "Always maintain a single source of truth for project state and progress",
-      "Document all decisions, design choices, and implementation details",
-      "Test thoroughly after each implementation step",
-      "Keep the documentation organized and cross-referenced",
-      "Follow the phased approach outlined in the master checklist"
+  "project": "Semantic System",
+  "version": "1.0",
+  "description": "Project rules for AI assistants working with the Semantic System project",
+  "doc_index_path": "/docs/README.md",
+  "master_checklist_path": "/docs/planning/SEMANTIC_SYSTEM_MASTER_CHECKLIST.md",
+  "strategy_path": "/docs/planning/SEMANTIC_SYSTEM_STRATEGY.md",
+  "vision_path": "/docs/planning/SEMANTIC_SYSTEM_FULL_VISION.md",
+  "project_status_path": "/docs/planning/PROJECT_STATUS.md",
+  
+  "core_principles": [
+    "Always maintain a single source of truth for project state and progress",
+    "Document all decisions, design choices, and implementation details",
+    "Test thoroughly after each implementation step",
+    "Keep the documentation organized and cross-referenced",
+    "Follow the phased approach outlined in the master checklist"
+  ],
+  
+  "onboarding_process": {
+    "steps": [
+      "Read the master checklist at /docs/planning/SEMANTIC_SYSTEM_MASTER_CHECKLIST.md first",
+      "Review the documentation index at /docs/README.md to understand the project structure",
+      "Check the strategy and vision documents to understand the project goals",
+      "Identify current phase and next steps from the master checklist",
+      "Start with the first unchecked item in the current phase"
     ],
-    
-    "onboarding_process": {
-      "steps": [
-        "Read the master checklist at /docs/planning/SEMANTIC_SYSTEM_MASTER_CHECKLIST.md first",
-        "Review the documentation index at /docs/README.md to understand the project structure",
-        "Check the strategy and vision documents to understand the project goals",
-        "Identify current phase and next steps from the master checklist",
-        "Start with the first unchecked item in the current phase"
-      ],
-      "required_documents": [
-        "/docs/planning/SEMANTIC_SYSTEM_MASTER_CHECKLIST.md",
-        "/docs/planning/SEMANTIC_SYSTEM_STRATEGY.md",
-        "/docs/planning/SEMANTIC_SYSTEM_FULL_VISION.md",
-        "/docs/README.md"
-      ]
+    "required_documents": [
+      "/docs/planning/SEMANTIC_SYSTEM_MASTER_CHECKLIST.md",
+      "/docs/planning/SEMANTIC_SYSTEM_STRATEGY.md",
+      "/docs/planning/SEMANTIC_SYSTEM_FULL_VISION.md",
+      "/docs/README.md"
+    ]
+  },
+  
+  "documentation_rules": {
+    "directory_structure": {
+      "/docs/planning/": "Project status, checklists, strategy, vision, improvements, and dev plans",
+      "/docs/design-docs/": "All system and component design docs",
+      "/docs/onboarding/": "Onboarding and high-level system overviews",
+      "/docs/guides/": "How-tos and technical guides",
+      "/docs/graphiti/": "All Graphiti-specific documentation"
     },
-    
-    "documentation_rules": {
-      "directory_structure": {
-        "/docs/planning/": "Project status, checklists, strategy, vision, improvements, and dev plans",
-        "/docs/design-docs/": "All system and component design docs",
-        "/docs/onboarding/": "Onboarding and high-level system overviews",
-        "/docs/guides/": "How-tos and technical guides",
-        "/docs/graphiti/": "All Graphiti-specific documentation"
-      },
-      "documentation_standards": [
-        "Place new design docs in /docs/design-docs/",
-        "Add new planning/status docs to /docs/planning/",
-        "Add onboarding or high-level intros to /docs/onboarding/",
-        "Place guides and how-tos in /docs/guides/",
-        "For component-specific docs, create a subdirectory (e.g., /docs/graphiti/)",
-        "Always update /docs/README.md when adding new documentation",
-        "Cross-link relevant docs for context and onboarding"
-      ],
-      "file_naming": "Use UPPERCASE for major system components, lowercase for specific features"
-    },
-    
-    "development_workflow": {
-      "before_starting": [
-        "Review master checklist and identify current phase and next steps",
-        "Check the specific acceptance criteria for your task",
-        "Review any existing design docs related to your task",
-        "Create or update design docs if necessary"
-      ],
-      "during_implementation": [
-        "Follow the subtasks in order of dependency",
-        "Document decisions and integration points",
-        "Maintain modularity and clarity",
-        "Write or update tests for all features"
-      ],
-      "after_each_step": [
-        "Run appropriate tests (unit, integration, or end-to-end)",
-        "Fix any failing tests before proceeding",
-        "Update the master checklist with progress",
-        "Document any issues or blockers in PROJECT_STATUS.md"
-      ],
-      "never_proceed_if": [
-        "Tests are failing",
-        "Documentation is incomplete or outdated",
-        "Design is unclear or incomplete",
-        "Previous steps aren't properly completed"
-      ]
-    },
-    
-    "testing_requirements": {
-      "unit_tests": "Required for all new components and functions",
-      "integration_tests": "Required for API endpoints and service interactions",
-      "end_to_end_tests": "Required for user-facing features",
-      "test_before_proceeding": true,
-      "update_tests_with_features": true
-    },
-    
-    "phase_tracking": {
-      "source_of_truth": "/docs/planning/SEMANTIC_SYSTEM_MASTER_CHECKLIST.md",
-      "how_to_identify_current_phase": "Look for the first phase in the master checklist with unchecked items",
-      "how_to_identify_next_task": "Find the first unchecked item in the current phase",
-      "update_frequency": "After completing any task or subtask",
-      "progress_tracking": "Use checkboxes in the master checklist ([x] for done, [ ] for not done)"
-    },
-    
-    "status_tracking": {
-      "update_master_checklist": "After completing any step or subtask",
-      "document_blockers": "Immediately in PROJECT_STATUS.md",
-      "record_decisions": "Document all significant decisions and their rationales",
-      "track_progress": "Use checkboxes in the master checklist"
-    },
-    
-    "handover_process": {
-      "update_documentation": "Ensure all documentation is current before handover",
-      "summarize_progress": "Add a status update to PROJECT_STATUS.md",
-      "note_next_steps": "Clearly indicate what should be done next",
-      "reference_checklist": "Always refer to the master checklist for context"
-    }
+    "documentation_standards": [
+      "Place new design docs in /docs/design-docs/",
+      "Add new planning/status docs to /docs/planning/",
+      "Add onboarding or high-level intros to /docs/onboarding/",
+      "Place guides and how-tos in /docs/guides/",
+      "For component-specific docs, create a subdirectory (e.g., /docs/graphiti/)",
+      "Always update /docs/README.md when adding new documentation",
+      "Cross-link relevant docs for context and onboarding"
+    ],
+    "file_naming": "Use UPPERCASE for major system components, lowercase for specific features"
+  },
+  
+  "development_workflow": {
+    "before_starting": [
+      "Review master checklist and identify current phase and next steps",
+      "Check the specific acceptance criteria for your task",
+      "Review any existing design docs related to your task",
+      "Create or update design docs if necessary"
+    ],
+    "during_implementation": [
+      "Follow the subtasks in order of dependency",
+      "Document decisions and integration points",
+      "Maintain modularity and clarity",
+      "Write or update tests for all features"
+    ],
+    "after_each_step": [
+      "Run appropriate tests (unit, integration, or end-to-end)",
+      "Fix any failing tests before proceeding",
+      "Update the master checklist with progress",
+      "Document any issues or blockers in PROJECT_STATUS.md"
+    ],
+    "never_proceed_if": [
+      "Tests are failing",
+      "Documentation is incomplete or outdated",
+      "Design is unclear or incomplete",
+      "Previous steps aren't properly completed"
+    ]
+  },
+  
+  "testing_requirements": {
+    "unit_tests": "Required for all new components and functions",
+    "integration_tests": "Required for API endpoints and service interactions",
+    "end_to_end_tests": "Required for user-facing features",
+    "test_before_proceeding": true,
+    "update_tests_with_features": true
+  },
+  
+  "phase_tracking": {
+    "source_of_truth": "/docs/planning/SEMANTIC_SYSTEM_MASTER_CHECKLIST.md",
+    "how_to_identify_current_phase": "Look for the first phase in the master checklist with unchecked items",
+    "how_to_identify_next_task": "Find the first unchecked item in the current phase",
+    "update_frequency": "After completing any task or subtask",
+    "progress_tracking": "Use checkboxes in the master checklist ([x] for done, [ ] for not done)"
+  },
+  
+  "status_tracking": {
+    "update_master_checklist": "After completing any step or subtask",
+    "document_blockers": "Immediately in PROJECT_STATUS.md",
+    "record_decisions": "Document all significant decisions and their rationales",
+    "track_progress": "Use checkboxes in the master checklist"
+  },
+  
+  "handover_process": {
+    "update_documentation": "Ensure all documentation is current before handover",
+    "summarize_progress": "Add a status update to PROJECT_STATUS.md",
+    "note_next_steps": "Clearly indicate what should be done next",
+    "reference_checklist": "Always refer to the master checklist for context"
   }
+}

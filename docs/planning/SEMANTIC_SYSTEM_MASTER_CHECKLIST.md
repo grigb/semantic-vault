@@ -1,13 +1,5 @@
 # Semantic System Master Checklist & Instructions
 
-[Moved from documents/SEMANTIC_SYSTEM_MASTER_CHECKLIST.md]
-
-(Full content preserved; see project index in [README.md](../README.md) for navigation.)
-
----
-
-# Semantic System Master Checklist & Instructions
-
 This checklist breaks down each phase into actionable, checkable steps, with acceptance criteria, subtasks, and links to design docs. Use this as your project tracker and onboarding doc for any new AI assistant or team member.
 
 ---
@@ -16,9 +8,10 @@ This checklist breaks down each phase into actionable, checkable steps, with acc
 - **Check off** each item as you complete it (use `[x]` for done, `[ ]` for not done)
 - **Update** with notes, links, or decisions as you go
 - **Reference relevant design docs** (see links in each phase below)
-- **New AI assistants:**
+- **New AI assistants and team members:**
     - Read this file first to instantly get project context and current status
-    - Follow cursor/context rules:
+    - Review the development guide at `/docs/onboarding/DEVELOPMENT_GUIDE.md`
+    - Follow cursor/context rules in `/.cursor/rules/rules.json`:
         - Always review this checklist, strategy, and vision docs before acting
         - After each major step, run or update the test suite (unit, integration, or end-to-end as appropriate)
         - Never proceed to the next step if tests fail—fix or revert first
@@ -156,35 +149,7 @@ This checklist breaks down each phase into actionable, checkable steps, with acc
 
 ---
 
-**NOTE:** Once all design docs and planning are complete, start a new chat/session with Cascade to reset the context window for implementation.
-
----
-
-## Phase 3: LLM Integration & Task Routing
-- [ ] Integrate local LLMs (Ollama, LM Studio, etc.)
-- [ ] Integrate API-based LLMs (OpenAI, Anthropic)
-- [ ] Implement task router for embedding vs. LLM requests
-- [ ] Add prompt engineering and chunking for long docs
-- [ ] Extend UI: chat with data, Q&A, rewriting, summarization
-- [ ] Document LLM integration and usage patterns
-
----
-
-## Phase 4: Advanced Features & Multi-Modal Support
-- [ ] Build analytics dashboard (usage, resource, trends)
-- [ ] Add visualizations (character arcs, entity networks, etc.)
-- [ ] Implement multi-modal support (images, audio, etc.)
-- [ ] Add notification and automation features
-- [ ] Document advanced features and onboarding
-
----
-
-## Phase 5: Portability & Integration
-- [ ] **Acceptance Criteria:**
-    - Can offload heavy LLM/embedding tasks to a cloud GPU provider (e.g., RunPod, Lambda, AWS, GCP, Paperspace, vast.ai)
-    - Secure, configurable, and cost-controlled integration
-    - Seamless switching between local and cloud compute as needed
-    - Clear documentation and UI for managing cloud resources
+**NOTE:** Once all design docs and planning are complete, start a new chat/session to reset the context window for implementation.
 
 ---
 
