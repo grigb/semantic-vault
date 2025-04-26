@@ -1,0 +1,1 @@
+ what we want is a system that can ask questions and then keep a log of all the answers and then use semantic search to figure out what the answer has been in the past so that experts running a system can train the system by working with it overtime

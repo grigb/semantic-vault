@@ -108,5 +108,11 @@
     "summarize_progress": "Add a status update to PROJECT_STATUS.md",
     "note_next_steps": "Clearly indicate what should be done next",
     "reference_checklist": "Always refer to the master checklist for context"
-  }
+  },
+  "mcp_server_rules": [
+    {
+      "server": "semantic–thinking",
+      "rule": "If there are multiple steps left in the plan, do not ask the user for new ideas. Continue working on the planned tasks. Only ask if the user has already interrupted the inflight plan with a sidetrack that must be done first."
+    }
+  ]
 }

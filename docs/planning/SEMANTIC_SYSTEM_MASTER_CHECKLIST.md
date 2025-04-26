@@ -66,29 +66,29 @@ This checklist breaks down each phase into actionable, checkable steps, with acc
 ---
 
 ## Phase 3: LLM Integration & Task Routing (Reordered for Dependency)
-- [ ] **Design/spec LLM integration architecture**
-    - [ ] Acceptance Criteria: Clear plan for local/API LLM integration, task routing logic, security
-    - [ ] Subtasks: Research LLM APIs (Ollama, LM Studio, OpenAI, Anthropic), draft spec, link to design doc
-- [ ] **Implement LLM integration (local and API-based)**
-    - [ ] Acceptance Criteria: Can run LLMs locally or via API, switch between them, secure config
-    - [ ] Subtasks: Implement adapters, test with multiple providers
-- [ ] **Implement task router for embedding vs. LLM requests**
-    - [ ] Acceptance Criteria: System can route requests to correct model/service based on task
-    - [ ] Subtasks: Implement routing logic, add tests, document
-- [ ] **Add prompt engineering and chunking for long docs**
-    - [ ] Acceptance Criteria: Can handle long documents, advanced prompting
-    - [ ] Subtasks: Implement chunking logic, prompt templates, test
-- [ ] **Extend UI: chat with data, Q&A, rewriting, summarization**
-    - [ ] Acceptance Criteria: User can interact with all LLM features via web UI
-    - [ ] Subtasks: UI features, connect to backend, test
-- [ ] **Document LLM integration and usage patterns**
-    - [ ] Acceptance Criteria: Clear docs, usage examples, troubleshooting
-    - [ ] Subtasks: Update README, add LLM usage guide, link to design docs
+- [x] **Design/spec LLM integration architecture**
+    - [x] Acceptance Criteria: Clear plan for local/API LLM integration, task routing logic, security
+    - [x] Subtasks: Research LLM APIs (Ollama, LM Studio, OpenAI, Anthropic), draft spec, link to design doc ([docs/design-docs/LLM_INTEGRATION_ARCHITECTURE.md](../design-docs/LLM_INTEGRATION_ARCHITECTURE.md))
+- [x] **Implement LLM integration (local and API-based)**
+    - [x] Acceptance Criteria: Can run LLMs locally or via API, switch between them, secure config
+    - [x] Subtasks: Implement adapters, test with multiple providers (Ollama, LM Studio, OpenAI, Anthropic), dynamic switching, secure config, UI integration
+- [x] **Implement task router for embedding vs. LLM requests**
+    - [x] Acceptance Criteria: System can route requests to correct model/service based on task
+    - [x] Subtasks: Implement unified endpoint, routing logic, extensible for new task types, add tests, document
+- [x] **Add prompt engineering and chunking for long docs**
+    - [x] Acceptance Criteria: Can handle long documents, advanced prompting
+    - [x] Subtasks: Implement chunking utility, prompt templates, extensible for advanced use, test
+- [x] **Extend UI: chat with data, Q&A, rewriting, summarization**
+    - [x] Acceptance Criteria: User can interact with all LLM features via web UI
+    - [x] Subtasks: UI features for chat, Q&A, rewriting, summarization; all connected to backend, tested
+- [x] **Document LLM integration and usage patterns**
+    - [x] Acceptance Criteria: Clear docs, usage examples, troubleshooting
+    - [x] Subtasks: Update README, add LLM usage guide, link to design docs, troubleshooting section
 
 ---
 
 ## Phase 4: Advanced Features & Multi-Modal Support (Reordered for Dependency)
-- [ ] **Design/spec analytics dashboard and visualizations**
+- [x] **Design/spec analytics dashboard and visualizations** ([docs/design-docs/ANALYTICS_DASHBOARD_SPEC.md](../design-docs/ANALYTICS_DASHBOARD_SPEC.md))
     - [ ] Acceptance Criteria: Clear plan for analytics, visualizations, data sources
     - [ ] Subtasks: Draft dashboard spec, define metrics, link to design doc
 - [ ] **Build analytics dashboard (usage, resource, trends)**
