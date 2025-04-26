@@ -1,13 +1,5 @@
 # Friendly Frontend UI Design Plan for AnythingLLM + Ollama
 
-[Moved from docs/FRIENDLY_UI_PLAN.md]
-
-(Full content preserved; see project index in /docs/README.md for navigation.)
-
----
-
-# Friendly Frontend UI Design Plan for AnythingLLM + Ollama
-
 ## Vision
 Design a modern, intuitive, and beautiful frontend UI that makes interacting with AnythingLLM + Ollama seamless for both technical and non-technical users. The UI should:
 - Make onboarding and workspace management effortless

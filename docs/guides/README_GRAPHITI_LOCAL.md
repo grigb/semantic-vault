@@ -1,11 +1,5 @@
 # Graphiti Local LLM Integration Workflow
 
-[Moved from docs/README_GRAPHITI_LOCAL.md]
-
-(Full content preserved; see project index in /docs/README.md for navigation.)
-
----
-
 # Graphiti Local LLM Integration Workflow
 
 **See also:**

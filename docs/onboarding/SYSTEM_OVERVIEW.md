@@ -1,13 +1,5 @@
 # AnythingLLM + Ollama System Overview
 
-{{ ... }}
-
-(Full content preserved; see project index in [README.md](../README.md) for navigation.)
-
----
-
-# AnythingLLM + Ollama System Overview
-
 **See also:**
 - [AI Friendly Pipeline Overview](../guides/AI_FRIENDLY_PIPELINE_OVERVIEW.md)
 - [Graphiti Local Guide](../guides/README_GRAPHITI_LOCAL.md)
