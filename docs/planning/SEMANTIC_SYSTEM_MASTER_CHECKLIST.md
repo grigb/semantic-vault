@@ -56,9 +56,9 @@ This checklist breaks down each phase into actionable, checkable steps, with acc
 - [x] **Q&A over markdown content**
     - [x] Acceptance Criteria: User can ask questions about ingested markdown and get semantic answers
     - [x] Subtasks: Add Q&A UI, connect to search/LLM backend, test with sample queries
-- [ ] **System health dashboard in web UI**
-    - [ ] Acceptance Criteria: Can view status of all core services (embedding proxy, vector DB, LLMs, etc.)
-    - [ ] Subtasks: Implement health checks, display status in UI, add alerts for failures
+- [x] **System health dashboard in web UI**
+    - [x] Acceptance Criteria: Can view status of all core services (embedding proxy, vector DB, LLMs, etc.)
+    - [x] Subtasks: Implement health checks, display status in UI, add alerts for failures
 - [ ] **Document model management features and usage**
     - [ ] Acceptance Criteria: Clear docs for all new features, with screenshots/examples
     - [ ] Subtasks: Update README, add web UI usage guide, link to design docs
