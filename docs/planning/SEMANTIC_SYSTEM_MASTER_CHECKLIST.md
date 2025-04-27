@@ -133,9 +133,9 @@ This checklist breaks down each phase into actionable, checkable steps, with acc
 - [ ] **Build import/integration scripts for other projects**
     - [ ] Acceptance Criteria: Easy to integrate with other systems
     - [ ] Subtasks: Script dev, test, document
-- [ ] **Finalize documentation and onboarding for all users**
-    - [ ] Acceptance Criteria: Clear, complete docs for all user types
-    - [ ] Subtasks: Update README, onboarding, link to design docs
+- [x] **Finalize documentation and onboarding for all users**
+    - [x] Acceptance Criteria: Clear, complete docs for all user types
+    - [x] Subtasks: Update README, onboarding, link to design docs
 
 ---
 
