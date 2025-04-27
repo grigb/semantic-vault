@@ -7,4 +7,6 @@ slices:
     temperature: 0.2
 retry:
   max_attempts: 400
-  backoff_seconds: 2
+  backoff_seconds: 8
+debug: true
+log_level: verbose
