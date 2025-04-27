@@ -64,6 +64,60 @@ curl -X POST http://localhost:9003/search \
 
 ---
 
+## Notification Automation System
+
+Semantic Vault features a robust notification automation system for real-time and historical user feedback across all backend and frontend workflows.
+
+### Architecture
+- **Backend:** FastAPI-based notification service integrated in Graphiti. Triggers notifications for ingestion, model management, routing, entity/group/episode operations, and more.
+- **Persistence:** All notifications are stored in a local SQLite database (`notifications.sqlite3`), ensuring durability and historical access.
+- **User Preferences:** Users can mute or filter notification types (success, error, info, etc.). Preferences are stored per user and respected in all notification queries.
+- **API Endpoints:**
+    - `POST /v1/notify`: Send a notification (backend use)
+    - `GET /v1/notifications`: List notifications (supports filtering by type/read/user)
+    - `POST /v1/notifications/read`: Mark a notification as read
+    - `POST /v1/notifications/mark_all_read`: Mark all notifications as read
+    - `GET/POST /v1/notifications/prefs`: Get/set user notification preferences
+
+### Frontend Features
+- **Notification Center:** Real-time toasts for new notifications.
+- **Notification History:** Bell icon opens a drawer with all notifications, filterable by type and read/unread status.
+- **User Preferences UI:** Users can mute notification types via a preferences panel.
+- **Bulk Actions:** Mark all as read, filter, and manage notification history.
+
+### Project Recovery & Persistent Memory
+- All notification data and user preferences are stored persistently in SQLite.
+- System is compliant with project recovery rules: state is recoverable after crash/restart, and onboarding is seamless.
+
+---
+
+## Notification Automation System
+
+Semantic Vault features a robust notification automation system for real-time and historical user feedback across all backend and frontend workflows.
+
+### Architecture
+- **Backend:** FastAPI-based notification service integrated in Graphiti. Triggers notifications for ingestion, model management, routing, entity/group/episode operations, and more.
+- **Persistence:** All notifications are stored in a local SQLite database (`notifications.sqlite3`), ensuring durability and historical access.
+- **User Preferences:** Users can mute or filter notification types (success, error, info, etc.). Preferences are stored per user and respected in all notification queries.
+- **API Endpoints:**
+    - `POST /v1/notify`: Send a notification (backend use)
+    - `GET /v1/notifications`: List notifications (supports filtering by type/read/user)
+    - `POST /v1/notifications/read`: Mark a notification as read
+    - `POST /v1/notifications/mark_all_read`: Mark all notifications as read
+    - `GET/POST /v1/notifications/prefs`: Get/set user notification preferences
+
+### Frontend Features
+- **Notification Center:** Real-time toasts for new notifications.
+- **Notification History:** Bell icon opens a drawer with all notifications, filterable by type and read/unread status.
+- **User Preferences UI:** Users can mute notification types via a preferences panel.
+- **Bulk Actions:** Mark all as read, filter, and manage notification history.
+
+### Project Recovery & Persistent Memory
+- All notification data and user preferences are stored persistently in SQLite.
+- System is compliant with project recovery rules: state is recoverable after crash/restart, and onboarding is seamless.
+
+---
+
 ## Usage & Testing
 
 ### Ingesting Data

@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Container, Typography, Box, TextField, Button, Paper, CircularProgress, List, ListItem, ListItemText, Divider } from "@mui/material";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
+import NotificationCenter from "./NotificationCenter";
+import NotificationHistory from "./NotificationHistory";
+import NotificationPrefs from "./NotificationPrefs";
 
 function MarkdownUploader({ onUpload }) {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -83,30 +86,37 @@ function App() {
   };
 
   return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
-      <Typography variant="h4" gutterBottom align="center">Semantic Vault</Typography>
-      <Box sx={{ mb: 4 }}>
-        <MarkdownUploader onUpload={handleUpload} />
-        {uploading && <CircularProgress sx={{ mt: 2 }} />}
-        {uploadMsg && <Paper sx={{ mt: 2, p: 2, whiteSpace: "pre-wrap" }}>{uploadMsg}</Paper>}
-      </Box>
-      <Paper sx={{ p: 3 }}>
-        <form onSubmit={handleSearch} style={{ display: "flex", gap: 8 }}>
-          <TextField
-            label="Search your knowledge vault"
-            variant="outlined"
-            fullWidth
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            disabled={searching}
-          />
-          <Button type="submit" variant="contained" color="primary" disabled={searching || !search} sx={{ minWidth: 120 }}>
-            Search
-          </Button>
-        </form>
-        <SearchResults results={results} loading={searching} />
-      </Paper>
-    </Container>
+    <>
+      <NotificationCenter />
+      <NotificationHistory />
+      <Container maxWidth="md" sx={{ mt: 4 }}>
+        <Typography variant="h3" align="center" gutterBottom>
+          Semantic Vault
+        </Typography>
+        <NotificationPrefs userId="demo-user" />
+        <Box sx={{ mb: 4 }}>
+          <MarkdownUploader onUpload={handleUpload} />
+          {uploading && <CircularProgress sx={{ mt: 2 }} />}
+          {uploadMsg && <Paper sx={{ mt: 2, p: 2, whiteSpace: "pre-wrap" }}>{uploadMsg}</Paper>}
+        </Box>
+        <Paper sx={{ p: 3 }}>
+          <form onSubmit={handleSearch} style={{ display: "flex", gap: 8 }}>
+            <TextField
+              label="Search your knowledge vault"
+              variant="outlined"
+              fullWidth
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              disabled={searching}
+            />
+            <Button type="submit" variant="contained" color="primary" disabled={searching || !search} sx={{ minWidth: 120 }}>
+              Search
+            </Button>
+          </form>
+          <SearchResults results={results} loading={searching} />
+        </Paper>
+      </Container>
+    </>
   );
 }
 
