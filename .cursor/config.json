@@ -1,0 +1,10 @@
+{
+    "continue": { "enabled": true, "max_retries": 800 },
+    "token_limit": 1400,
+    "models": {
+      "default": "gpt-4.1",
+      "large_file": "gpt-4.1",
+      "draft": "gpt-4.1"
+    },
+    "stop_on_focus": false
+  }

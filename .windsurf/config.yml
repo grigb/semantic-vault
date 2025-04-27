@@ -1,0 +1,10 @@
+auto_continue:
+  enabled: true
+  provider: chatgpt
+slices:
+  - files: ["api/**", "agents/**", "docker-compose.yml", "db/**"]
+    model: chatgpt-4.1
+    temperature: 0.2
+retry:
+  max_attempts: 4
+  backoff_seconds: 2
