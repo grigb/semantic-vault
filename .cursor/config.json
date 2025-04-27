@@ -1,6 +1,6 @@
 {
     "continue": { "enabled": true, "max_retries": 800 },
-    "token_limit": 1400,
+    "token_limit": 14000000,
     "models": {
       "default": "gpt-4.1",
       "large_file": "gpt-4.1",
