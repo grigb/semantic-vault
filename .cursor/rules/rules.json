@@ -1,19 +1,22 @@
 {
   "project": "Semantic System",
-  "version": "1.0",
+  "version": "1.2",
   "description": "Project rules for AI assistants working with the Semantic System project",
   "doc_index_path": "/docs/README.md",
   "master_checklist_path": "/docs/planning/SEMANTIC_SYSTEM_MASTER_CHECKLIST.md",
   "strategy_path": "/docs/planning/SEMANTIC_SYSTEM_STRATEGY.md",
   "vision_path": "/docs/planning/SEMANTIC_SYSTEM_FULL_VISION.md",
   "project_status_path": "/docs/planning/PROJECT_STATUS.md",
+  "development_workflow_path": "/docs/DEVELOPMENT.md",
   
   "core_principles": [
     "Always maintain a single source of truth for project state and progress",
     "Document all decisions, design choices, and implementation details",
     "Test thoroughly after each implementation step",
     "Keep the documentation organized and cross-referenced",
-    "Follow the phased approach outlined in the master checklist"
+    "Follow the phased approach outlined in the master checklist",
+    "All development, testing, and automation must run inside Docker containers",
+    "Maintain container modularity and clear separation of concerns"
   ],
   
   "onboarding_process": {
@@ -21,6 +24,8 @@
       "Read the master checklist at /docs/planning/SEMANTIC_SYSTEM_MASTER_CHECKLIST.md first",
       "Review the documentation index at /docs/README.md to understand the project structure",
       "Check the strategy and vision documents to understand the project goals",
+      "Read the development workflow at /docs/DEVELOPMENT.md to understand container-based workflow",
+      "Review the Docker container structure in /docker to understand system components",
       "Identify current phase and next steps from the master checklist",
       "Start with the first unchecked item in the current phase"
     ],
@@ -28,18 +33,24 @@
       "/docs/planning/SEMANTIC_SYSTEM_MASTER_CHECKLIST.md",
       "/docs/planning/SEMANTIC_SYSTEM_STRATEGY.md",
       "/docs/planning/SEMANTIC_SYSTEM_FULL_VISION.md",
-      "/docs/README.md"
+      "/docs/README.md",
+      "/docs/DEVELOPMENT.md",
+      "/docker/docker-compose.yml"
     ]
   },
   
+  "planning_source_of_truth": {
+    "description": "The MCP server's sequential-thinking plan is the operational source of truth for project planning, task breakdown, and execution. Markdown planning and checklist documents are maintained for onboarding and human review, but all automation and agent behavior must defer to the MCP plan if any conflict arises."
+  },
+
   "documentation_rules": {
     "continuous_documentation": "If anything new, unclear, or not yet documented arises during development, it must be noted and added to the documentation in the correct place according to the docs directory structure. This ensures ongoing documentation completeness and accuracy.",
     "directory_structure": {
       "/docs/planning/": "Project status, checklists, strategy, vision, improvements, and dev plans",
       "/docs/design-docs/": "All system and component design docs",
       "/docs/onboarding/": "Onboarding and high-level system overviews",
-      "/docs/guides/": "How-tos and technical guides",
-      "/docs/graphiti/": "All Graphiti-specific documentation"
+      "/docs/guides/": "How-tos and technical guides",    
+      "/docker/": "Container definitions and orchestration configuration"
     },
     "documentation_standards": [
       "Place new design docs in /docs/design-docs/",
@@ -48,9 +59,63 @@
       "Place guides and how-tos in /docs/guides/",
       "For component-specific docs, create a subdirectory (e.g., /docs/graphiti/)",
       "Always update /docs/README.md when adding new documentation",
-      "Cross-link relevant docs for context and onboarding"
+      "Cross-link relevant docs for context and onboarding",
+      "Document the container-based workflow in DEVELOPMENT.md",
+      "Update onboarding and troubleshooting docs to include steps for container discovery and verification",
+      "Document new containers and their purpose in /docs/README.md and cross-link to their Dockerfiles"
     ],
     "file_naming": "Use UPPERCASE for major system components, lowercase for specific features"
+  },
+  
+  "container_development": {
+    "description": "Development standards for containerized applications",
+    "rules": [
+      "All development, testing, and automation must run inside Docker containers",
+      "No host virtualenv activation is required or supported for project automation",
+      "Install all project dependencies (including dev/test tools) in the Docker image",
+      "Document the container-based workflow in DEVELOPMENT.md"
+    ]
+  },
+  
+  "container_modularity": {
+    "overview": "Each major service or component should have its own directory under /docker (e.g., /docker/whispercpp-arm64, /docker/clip-arm64). This directory must contain a Dockerfile and all scripts/configs needed for building and running that container.",
+    "naming": "Name each directory and container for its function and architecture (e.g., clip-arm64, embedding-proxy).",
+    "grouping": "Use docker-compose.yml in the /docker directory to group related containers into a single project (e.g., semantic-vault, quill, suna). This enables launching, stopping, and networking containers as a logical unit.",
+    "modularity": "All containers should be modular and self-contained. New containers should follow the same pattern: create a new directory under /docker, add a Dockerfile, and update docker-compose.yml to include the new service.",
+    "scalability": "This structure allows the system to run many different services in parallel, each independently managed and updated.",
+    "onboarding": "Document new containers and their purpose in /docs/README.md and cross-link to their Dockerfiles for onboarding.",
+    "update_required_services": "Whenever a new container/service is added to the project, update the REQUIRED_SERVICES array in scripts/container_check_and_build.sh so the automation can check and start all necessary containers."
+
+  },
+  
+  "execution_environment": {
+    "description": "Guidelines for command execution and runtime environments",
+    "rules": [
+      "Run all project scripts (test, lint, build, run) inside the container",
+      "CI/CD pipelines must execute commands inside Docker",
+      "Host virtualenvs are optional and explicitly unsupported for automation"
+    ]
+  },
+  
+  "developer_experience": {
+    "description": "Tools and practices to improve developer workflow",
+    "rules": [
+      "Provide Makefile targets or helper scripts for common Docker commands",
+      "Include clear error messages directing users to Docker when host execution is attempted",
+      "All development tools must be pre-installed in the container image"
+    ]
+  },
+  
+  "container_tracking_and_discovery": {
+    "description": "Rules to ensure the project always checks and documents the actual state of Docker containers, to prevent disconnects between expected and real environments.",
+    "rules": [
+      "Always check the current state of all Docker containers related to the project before running, building, or debugging",
+      "Record and document the exact container names and IDs when containers are created or started",
+      "Mention the actual container names and IDs in logs, documentation, and automation outputs so future agents or developers can reference them",
+      "If a container is missing or not as expected, provide diagnostic output showing the current state and suggest corrective action",
+      "Update onboarding and troubleshooting docs to include steps for container discovery and verification",
+      "Persist the current container state (names, IDs, roles, ports) in a standardized, discoverable file at the project root named .windsurf_persistent_memory.md after any container is created, started, or stopped. Future agents must consult this file for accurate environment discovery"
+    ]
   },
   
   "development_workflow": {
@@ -59,25 +124,29 @@
       "Review master checklist and identify current phase and next steps",
       "Check the specific acceptance criteria for your task",
       "Review any existing design docs related to your task",
-      "Create or update design docs if necessary"
+      "Create or update design docs if necessary",
+      "Verify Docker container state and configuration"
     ],
     "during_implementation": [
       "Follow the subtasks in order of dependency",
       "Document decisions and integration points",
       "Maintain modularity and clarity",
-      "Write or update tests for all features"
+      "Write or update tests for all features",
+      "Run all scripts and tests inside Docker containers"
     ],
     "after_each_step": [
-      "Run appropriate tests (unit, integration, or end-to-end)",
+      "Run appropriate tests (unit, integration, or end-to-end) inside containers",
       "Fix any failing tests before proceeding",
       "Update the master checklist with progress",
-      "Document any issues or blockers in PROJECT_STATUS.md"
+      "Document any issues or blockers in PROJECT_STATUS.md",
+      "Update container state in .windsurf_persistent_memory.md if modified"
     ],
     "never_proceed_if": [
       "Tests are failing",
       "Documentation is incomplete or outdated",
       "Design is unclear or incomplete",
-      "Previous steps aren't properly completed"
+      "Previous steps aren't properly completed",
+      "Container environment is misconfigured or not running"
     ]
   },
   
@@ -86,7 +155,8 @@
     "integration_tests": "Required for API endpoints and service interactions",
     "end_to_end_tests": "Required for user-facing features",
     "test_before_proceeding": true,
-    "update_tests_with_features": true
+    "update_tests_with_features": true,
+    "run_in_containers": "All tests must be run inside Docker containers"
   },
   
   "phase_tracking": {
@@ -101,15 +171,52 @@
     "update_master_checklist": "After completing any step or subtask",
     "document_blockers": "Immediately in PROJECT_STATUS.md",
     "record_decisions": "Document all significant decisions and their rationales",
-    "track_progress": "Use checkboxes in the master checklist"
+    "track_progress": "Use checkboxes in the master checklist",
+    "container_state_tracking": "Track container state in .windsurf_persistent_memory.md"
   },
   
   "handover_process": {
     "update_documentation": "Ensure all documentation is current before handover",
     "summarize_progress": "Add a status update to PROJECT_STATUS.md",
     "note_next_steps": "Clearly indicate what should be done next",
-    "reference_checklist": "Always refer to the master checklist for context"
+    "reference_checklist": "Always refer to the master checklist for context",
+    "document_container_state": "Ensure container state is documented in .windsurf_persistent_memory.md"
   },
+  
+  "development_process": {
+    "description": "Standards for code changes and implementation",
+    "rules": [
+      "Check for existing implementations before adding new functionality",
+      "Follow established patterns in the codebase",
+      "Document any deviations from container-based development with justification"
+    ]
+  },
+  
+  "code_quality": {
+    "description": "Standards for maintaining high quality, maintainable code",
+    "rules": [
+      "Maximum file size is 500 lines. If a file exceeds 500 lines, it must be refactored into smaller modules or components"
+    ]
+  },
+  
+  "container_virtualenv_resolution": {
+    "description": "Rule for resolving Python environment errors by preferring container-based solutions over host virtualenv activation.",
+    "rules": [
+      "Whenever a Python tool, dependency, or migration command fails due to a missing or inactive virtual environment (e.g., 'Could not find an activated virtualenv'), IMMEDIATELY check if the project is running in a Docker container or similar containerized environment.",
+      "If Docker (or docker-compose) configuration is present, ALWAYS: (1) Attempt to run the required command via 'docker compose exec <service> <command>' (or equivalent), targeting the correct running container (usually 'backend'). (2) Only prompt the user for manual virtualenv activation if containerization is not detected or available. (3) Default to container-based automation for all Python environment and dependency management tasks, unless explicitly instructed otherwise.",
+      "This check must be performed every time a Python environment error occurs.",
+      "The rationale: One of the main reasons for using containers is to avoid host virtualenv issues and ensure reproducible automation."
+    ]
+  },
+  
+  "ai_agent_behavior": {
+    "description": "Rules for reasoning and decision-making by AI/automation agents",
+    "rules": [
+      "If uncertain about what to do next, always check for an existing plan from the MCP server called sequential-thinking before proceeding.",
+      "If a master project plan document (such as docs/design/design_docs/project_plan.md) exists, use the MCP server's sequential-thinking plan to break down the plan into granular, prioritized tasks and sub-tasks, considering importance, dependencies, and the need to insert prerequisite steps where necessary. Do NOT inject new ideas; strictly follow the master plan. As tasks are completed, update both the MCP server plan and the markdown checklist to keep both in sync, so project status can be reviewed in both places."
+    ]
+  },
+  
   "mcp_server_rules": [
     {
       "server": "semantic–thinking",

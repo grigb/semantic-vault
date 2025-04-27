@@ -9,5 +9,5 @@ if [ ! -f "$MODEL_PATH" ]; then
   wget -O "$MODEL_PATH" https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.en.bin
 fi
 
-/whisper.cpp/main -m "$MODEL_PATH" -f "$AUDIO_FILE" -of /app/output.txt
+/whisper.cpp/whisper -m "$MODEL_PATH" -f "$AUDIO_FILE" -of /app/output.txt
 cat /app/output.txt
