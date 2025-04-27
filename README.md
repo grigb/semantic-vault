@@ -1,5 +1,23 @@
 # Semantic Vault: Vector Search Platform with Neo4j, Graphiti, and Embedding Proxy
 
+---
+
+## 🚀 Onboarding & Documentation
+
+Welcome! If you're new (human or AI agent), start here:
+
+- **Documentation Index:** [docs/README.md](./docs/README.md) — Central navigation for all project docs
+- **Master Checklist:** [docs/planning/SEMANTIC_SYSTEM_MASTER_CHECKLIST.md](./docs/planning/SEMANTIC_SYSTEM_MASTER_CHECKLIST.md) — Project phases, status, and next steps
+- **Development Guide:** [docs/onboarding/DEVELOPMENT_GUIDE.md](./docs/onboarding/DEVELOPMENT_GUIDE.md) — Workflow, standards, and best practices
+- **Onboarding & System Overview:**
+    - [docs/onboarding/SYSTEM_OVERVIEW.md](./docs/onboarding/SYSTEM_OVERVIEW.md)
+    - [docs/onboarding/TEAM_INTRO_TO_SEMANTIC_STACK.md](./docs/onboarding/TEAM_INTRO_TO_SEMANTIC_STACK.md)
+- **Design Docs:** [docs/design-docs/](./docs/design-docs/) — API and component specifications
+
+**Always consult the master checklist and documentation index first to understand project status and where to begin.**
+
+---
+
 ## Overview
 Semantic Vault is a modern, extensible platform for knowledge graph and vector search, combining:
 - **Neo4j 5.18+**: Native vector search and graph database
@@ -46,6 +64,10 @@ curl -X POST http://localhost:9003/search \
   -H 'Content-Type: application/json' \
   -d '{"query": "test fact", "group_ids": ["products"], "max_facts": 5}'
 ```
+
+---
+
+For more guides, onboarding, and design docs, see the [docs/](./docs/) directory and the documentation index above.
 
 ---
 
