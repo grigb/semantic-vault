@@ -43,7 +43,7 @@ services:
       - qdrant # Make sure the vector DB starts first
       - neo4j  # Make sure the graph DB starts first
     ports:
-      - "9003:8000" # Changed host port to uncommon 9003 for Graphiti API
+      - "9003:9083" # Changed host port to uncommon 9003 for Graphiti API (container now uses 9083)
     environment:
       # --- Core Settings ---
       GRAPHITI_API_KEY: "${GRAPHITI_API_KEY?GRAPHITI_API_KEY must be set in .env}"
