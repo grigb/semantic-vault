@@ -4,6 +4,13 @@ Welcome to the documentation hub for this project. Use this index to find all pl
 
 ---
 
+## User Journeys
+- **Strategy:** [guides/user-journeys/STRATEGY.md](./guides/user-journeys/STRATEGY.md)
+- **Template:** [guides/user-journeys/TEMPLATE.md](./guides/user-journeys/TEMPLATE.md)
+- **All user journeys:** See [guides/user-journeys/](./guides/user-journeys/)
+
+---
+
 ## Directory Structure
 
 - **/docs/planning/** — Project status, checklists, strategy, vision, improvements, and dev plans
