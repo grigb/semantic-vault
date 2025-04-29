@@ -221,8 +221,17 @@
       "This check must be performed every time a Python environment error occurs.",
       "The rationale: One of the main reasons for using containers is to avoid host virtualenv issues and ensure reproducible automation."
     ]
+
   },
-  
+  "port_management": {
+    "description": "Rules for managing and avoiding port conflicts across all development and runtime environments.",
+    "rules": [
+      "Before selecting or using any network port for services, Docker, or development, always check ~/work/dev-references/dev-port-register.yaml for conflicts.",
+      "If a port conflict is detected (i.e., the port is already registered to another project), notify the user and suggest alternative ports.",
+      "If ports change, update the register and alert the user.",
+      "This rule is persistent and applies to all future port-related operations in this workspace."
+    ]
+  },
   "ai_agent_behavior": {
     "description": "Rules for reasoning and decision-making by AI/automation agents",
     "rules": [

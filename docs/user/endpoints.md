@@ -62,23 +62,193 @@ This document lists all available API endpoints in the system, with descriptions
 ### Switch Active Model
 - **Endpoint:** `POST /v1/model_catalog/switch`
 - **Description:** Switches the active model for a given type (llm or embedding).
-- **Status:** broken
+- **Status:** untested
 - **Sample Request:**
   ```bash
   curl -X POST http://localhost:9083/v1/model_catalog/switch \
     -H 'Content-Type: application/json' \
-    -d '{"name": "TheBloke/phi-2-GGUF", "type": "llm"}'
+    -d '{"name": "all-MiniLM-L6-v2", "type": "embedding"}'
   ```
 - **Sample Response:**
   ```json
-  {"message": "Active llm model set to TheBloke/phi-2-GGUF", "active_models": {"llm": "TheBloke/phi-2-GGUF"}}
+  {"message": "Switched active model to all-MiniLM-L6-v2", "type": "embedding"}
   ```
-- **Sample Error Responses:**
+- **Sample Error Response:**
   ```json
-  {"detail": "Missing required parameter: name or type"}  // 400
   {"detail": "Model not installed"}  // 404
+  {"detail": "Missing required parameter: name"}  // 400
   {"detail": "Internal Server Error: <error details>"}  // 500
   ```
+
+---
+
+### List Loaded Models
+- **Endpoint:** `GET /v1/models`
+- **Description:** Lists all currently loaded models (embedding proxy).
+- **Status:** working
+- **Sample Response:**
+  ```json
+  {"models": ["all-MiniLM-L6-v2", "other-model"]}
+  ```
+- **Sample Error Response:**
+  ```json
+  {"detail": "Internal Server Error: <error details>"}
+  ```
+
+---
+
+### Install Model (Embedding Proxy)
+- **Endpoint:** `POST /v1/install_model`
+- **Description:** Installs a new model via the embedding proxy.
+- **Status:** working
+- **Sample Request:**
+  ```bash
+  curl -X POST http://localhost:9083/v1/install_model \
+    -H 'Content-Type: application/json' \
+    -d '{"name": "all-MiniLM-L6-v2"}'
+  ```
+- **Sample Response:**
+  ```json
+  {"message": "Model installed", "name": "all-MiniLM-L6-v2"}
+  ```
+- **Sample Error Response:**
+  ```json
+  {"detail": "Invalid model name"}  // 400
+  {"detail": "Internal Server Error: <error details>"}  // 500
+  ```
+
+---
+
+### Add Entity Node
+- **Endpoint:** `POST /entity-node`
+- **Description:** Adds a new entity node to the graph.
+- **Status:** working
+- **Sample Request:**
+  ```bash
+  curl -X POST http://localhost:9083/entity-node \
+    -H 'Content-Type: application/json' \
+    -d '{"name": "Entity Name", "type": "concept"}'
+  ```
+- **Sample Response:**
+  ```json
+  {"uuid": "1234-uuid", "name": "Entity Name", "type": "concept"}
+  ```
+- **Sample Error Response:**
+  ```json
+  {"detail": "Missing required parameter: name"}  // 400
+  {"detail": "Internal Server Error: <error details>"}  // 500
+  ```
+
+---
+
+### Add Episode
+- **Endpoint:** `POST /episode`
+- **Description:** Adds a new episode to the graph.
+- **Status:** working
+- **Sample Request:**
+  ```bash
+  curl -X POST http://localhost:9083/episode \
+    -H 'Content-Type: application/json' \
+    -d '{"title": "Episode Title", "description": "Details here"}'
+  ```
+- **Sample Response:**
+  ```json
+  {"uuid": "5678-uuid", "title": "Episode Title"}
+  ```
+- **Sample Error Response:**
+  ```json
+  {"detail": "Missing required parameter: title"}  // 400
+  {"detail": "Internal Server Error: <error details>"}  // 500
+  ```
+
+---
+
+### Test Embedding (OpenAI Compatible)
+- **Endpoint:** `POST /v1/embeddings`
+- **Description:** OpenAI-compatible endpoint for generating embeddings.
+- **Status:** working
+- **Sample Request:**
+  ```bash
+  curl -X POST http://localhost:9083/v1/embeddings \
+    -H 'Content-Type: application/json' \
+    -d '{"input": "Hello world"}'
+  ```
+- **Sample Response:**
+  ```json
+  {"data": [{"embedding": [0.1, 0.2, 0.3], "index": 0}], "object": "list"}
+  ```
+- **Sample Error Response:**
+  ```json
+  {"detail": "Invalid input"}  // 400
+  {"detail": "Internal Server Error: <error details>"}  // 500
+  ```
+
+---
+
+### Ingest Markdown Chunks
+- **Endpoint:** `POST /v1/qa/markdown/ingest_chunks`
+- **Description:** Ingests markdown chunks for semantic processing.
+- **Status:** working
+- **Sample Request:**
+  ```bash
+  curl -X POST http://localhost:9083/v1/qa/markdown/ingest_chunks \
+    -H 'Content-Type: application/json' \
+    -d '{"chunks": ["chunk1", "chunk2"]}'
+  ```
+- **Sample Response:**
+  ```json
+  {"message": "Chunks ingested", "count": 2}
+  ```
+- **Sample Error Response:**
+  ```json
+  {"detail": "Missing required parameter: chunks"}  // 400
+  {"detail": "Internal Server Error: <error details>"}  // 500
+  ```
+
+---
+
+### Task Routing
+- **Endpoint:** `POST /v1/task/route`
+- **Description:** Routes a task to the appropriate model or service.
+- **Status:** working
+- **Sample Request:**
+  ```bash
+  curl -X POST http://localhost:9083/v1/task/route \
+    -H 'Content-Type: application/json' \
+    -d '{"task": "summarize", "input": "Text here"}'
+  ```
+- **Sample Response:**
+  ```json
+  {"result": "Summary here"}
+  ```
+- **Sample Error Response:**
+  ```json
+  {"detail": "Missing required parameter: task"}  // 400
+  {"detail": "Internal Server Error: <error details>"}  // 500
+  ```
+
+---
+
+### Set Notification Preferences
+- **Endpoint:** `POST /v1/notifications/prefs`
+- **Description:** Sets user notification preferences.
+- **Status:** working
+- **Sample Request:**
+  ```bash
+  curl -X POST http://localhost:9083/v1/notifications/prefs \
+    -H 'Content-Type: application/json' \
+    -d '{"email": true, "sms": false}'
+  ```
+- **Sample Response:**
+  ```json
+  {"message": "Preferences updated", "prefs": {"email": true, "sms": false}}
+  ```
+- **Sample Error Response:**
+  ```json
+  {"detail": "Invalid preference format"}  // 400
+  {"detail": "Internal Server Error: <error details>"}  // 500
+  ```
+
 
 ### Model Management Web UI
 - **Endpoint:** `GET /v1/model_management_ui`

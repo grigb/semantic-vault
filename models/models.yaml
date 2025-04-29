@@ -1,0 +1,4 @@
+- name: all-MiniLM-L6-v2
+  backend: transformers
+  path: /models/all-MiniLM-L6-v2
+  type: embedding

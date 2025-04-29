@@ -1,6 +1,19 @@
 # docker-compose.yml
 services:
   # -------------------------------------------
+  # Embedding Proxy: LocalAI
+  # -------------------------------------------
+  embedding-proxy:
+    build:
+      context: ../embedding-proxy
+      dockerfile: Dockerfile
+    container_name: embedding-proxy
+    ports:
+      - "9009:8080"
+    networks:
+      - ai_network
+
+  # -------------------------------------------
   # LLM Host: AnythingLLM
   # -------------------------------------------
   anythingllm:
@@ -46,6 +59,8 @@ services:
       - neo4j  # Make sure the graph DB starts first
     ports:
       - "9003:9083" # Changed host port to uncommon 9003 for Graphiti API (container now uses 9083)
+    volumes:
+      - /Users/grig/semantic-vault/graphiti/tests:/app/tests
     environment:
       # --- Core Settings ---
       GRAPHITI_API_KEY: "${GRAPHITI_API_KEY?GRAPHITI_API_KEY must be set in .env}"
@@ -73,8 +88,7 @@ services:
       # DB_USER: "${POSTGRES_USER}"
       # DB_PASSWORD: "${POSTGRES_PASSWORD}"
       # DB_NAME: "${POSTGRES_DB}"
-    volumes:
-      - graphiti-data:/app/data # Persist Graphiti's internal data (SQLite DB, metadata)
+
     restart: unless-stopped
     networks:
       - ai_network
