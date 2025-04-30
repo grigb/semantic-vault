@@ -7,9 +7,9 @@ services:
     build:
       context: ../embedding-proxy
       dockerfile: Dockerfile
-    container_name: embedding-proxy
+    container_name: semantic-vault-embedding-proxy
     ports:
-      - "9009:8080"
+      - "9010:8080"
     networks:
       - ai_network
 
@@ -18,7 +18,7 @@ services:
   # -------------------------------------------
   anythingllm:
     image: mintplexlabs/anythingllm:latest # Use the official image
-    container_name: anythingllm
+    container_name: semantic-vault-anythingllm
     depends_on:
       - graphiti # Make sure Graphiti starts first
     ports:
@@ -51,9 +51,9 @@ services:
   # -------------------------------------------
   graphiti:
     build:
-      context: ..
+      context: ../graphiti
       dockerfile: Dockerfile
-    container_name: graphiti
+    container_name: semantic-vault-graphiti
     depends_on:
       - qdrant # Make sure the vector DB starts first
       - neo4j  # Make sure the graph DB starts first
@@ -98,7 +98,7 @@ services:
   # -------------------------------------------
   qdrant:
     image: qdrant/qdrant:latest
-    container_name: qdrant
+    container_name: semantic-vault-qdrant
     ports:
       - "9004:6333" # Changed host port to uncommon 9004 for Qdrant HTTP
       - "9005:6334" # Changed host port to uncommon 9005 for Qdrant gRPC
@@ -115,20 +115,23 @@ services:
   # -------------------------------------------
   neo4j:
     image: neo4j:5.18
-    container_name: neo4j
+    container_name: semantic-vault-neo4j
     ports:
       - "9006:7474" # Changed host port to uncommon 9006 for Neo4j Browser
-      - "9007:7687" # Changed host port to uncommon 9007 for Neo4j Bolt
+      - "7687:7687" # Keep internal port as 7687 for Docker network resolution
     volumes:
       - ~/.ollama/models:/root/.ollama/models # Mount Ollama model cache for sharing across containers
       - neo4j-data:/data
     environment:
       # Sets the initial password for the 'neo4j' user.
       NEO4J_AUTH: neo4j/${NEO4J_PASSWORD?NEO4J_PASSWORD must be set in .env}
-      NEO4J_PLUGINS: '["graph-data-science"]'
+      NEO4J_PLUGINS: 'graph-data-science,apoc'
     restart: unless-stopped
     networks:
-      - ai_network
+      ai_network:
+        aliases:
+          - neo4j
+          - graphdb
 
 # -------------------------------------------
 # Volumes (for data persistence)
